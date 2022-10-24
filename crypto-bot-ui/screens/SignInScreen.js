@@ -17,8 +17,6 @@ function SignInScreen() {
   const api_ref = useRef();
   const secret_ref = useRef();
 
-  const url = 'http://127.0.0.1:8000';
-
 
   // useEffect(() => {
   //   const getData = async () => {
@@ -35,7 +33,7 @@ function SignInScreen() {
 
   const onPress_logIn = () => {
     const getData = async () => {
-        const response = await axios.post(url + '/signIn/', {
+        const response = await api_axios.post('/signIn/', {
           api_key : apiKey,
           secret_key : secret,
         })
