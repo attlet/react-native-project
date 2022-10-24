@@ -35,7 +35,7 @@ function SignInScreen() {
 
   const onPress_logIn = () => {
     const getData = async () => {
-        const response = await api_axios.post('/signIn/', {
+        const response = await axios.post(url + '/signIn/', {
           api_key : apiKey,
           secret_key : secret,
         })
