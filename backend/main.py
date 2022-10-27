@@ -8,8 +8,7 @@ from binance.exceptions import BinanceAPIException
 
 app = FastAPI()
 # api_key = 'rskXdqhCU8kLzjaHMGOvgUhZOAuUVahduosufTlJyN43RSJKdCHGe9Eow9Axleuu'
-# api_secret = 'gPGaA0gN20m31R5msnwgctAy2TQOfy55frDtZoDQx1v3l7Px08k46vMGKmxmEZz5'
-#gPGaA0gN20m31R5msnwgctAy2TQOfy55frDtZoDQx1v3l7Px08k46vMGKmxmEZz5
+# api_secret = ''
 
 # client = Client(api_key= api_key, api_secret=api_secret)
 
