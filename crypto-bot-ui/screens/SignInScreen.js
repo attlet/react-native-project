@@ -14,6 +14,10 @@ function SignInScreen() {
   const [visibleModal, setvisibleModal] = useState(false);
   const [apiKey, setApiKey] = useState('');
   const [secret, setSecret] = useState('');
+  const [userValue, setUser] = useState([]);
+  const [apiError, setapiError] = useState("api 확인 중");
+  const [err, setError] = useState(false);
+ 
   const api_ref = useRef();
   const secret_ref = useRef();
 
@@ -32,28 +36,35 @@ function SignInScreen() {
   // }, []);
 
   const onPress_logIn = () => {
+
+    setvisibleModal(true);
+
     const getData = async () => {
+
+      try {
         const response = await api_axios.post('/signIn/', {
           api_key : apiKey,
           secret_key : secret,
-        })
-        .then(function(response){
-           console.log(response);
-        })
-        .catch(function(error){
-          console.log(error);
         });
-      }
-    getData();
-    console.log(apiKey);
-    console.log(secret);
-    // setvisibleModal(true);
-    // navigation.navigate('BotList');
+        setUser(response.data); 
+        setvisibleModal(false);
+        console.log(response.data);
+        console.log(apiKey);
+        console.log(secret);
+        console.log(userValue);
+
+        navigation.navigate('BotList');
   
+      } catch(error){
+        setError(true);
+        console.log(error); 
+        setapiError("api 키 오류");
+      }
+    }
+
+    getData();
 }
  
-
-
   return (
     <SafeAreaView style={styles.fullscreen}>
       <Modal
@@ -61,7 +72,7 @@ function SignInScreen() {
         presentationStyle='formSheet'
         visible={visibleModal} >
           <View style = {styles.modalView}>
-            <Text style={styles.modalText}>API확인 중</Text>
+            <Text style={styles.modalText}>{apiError}</Text>
           </View>
       </Modal>
       <Text style={styles.text}>Crypt-Auto</Text>

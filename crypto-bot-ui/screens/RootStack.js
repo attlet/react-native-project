@@ -14,11 +14,11 @@ function RootStack() {
       headerMode='none'
       screenOptions={{}}
     >
-      <Stack.Screen
+      {/* <Stack.Screen
         name='SignInScreen'
         component={SignInScreen}
         options={{title: 'sign in'}}
-        />
+        /> */}
       <Stack.Screen
         name='BotList'
         component={BotListScreen}
@@ -32,7 +32,6 @@ function RootStack() {
       <Stack.Screen
         name='AddBot'
         component={AddBotScreen}
-        options={{ title: 'Add Bot' }}
       />
     </Stack.Navigator>
   );
