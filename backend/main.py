@@ -13,6 +13,8 @@ app = FastAPI()
 # api_key = 'rskXdqhCU8kLzjaHMGOvgUhZOAuUVahduosufTlJyN43RSJKdCHGe9Eow9Axleuu'
 # api_secret = ''
 
+# client = Client(api_key= api_key, api_secret=api_secret)
+
 class sign_info(BaseModel):
     api_key : str
     secret_key : str
@@ -59,13 +61,11 @@ def read_item(item_id: int, q: Union[str, None] = None):
 
 @app.post("/signIn")
 def read_user(user : sign_info):
-     
-    user_dict = user.dict()
-    client = Client(api_key= user.api_key, api_secret=user.secret_key)   #계좌정보 가져오기 
-    test_param = client.get_asset_balance(asset='USDT')
-    user_dict.update({"my_balance" : test_param})   
+   client = Client(api_key= user.api_key, api_secret=user.secret_key)
+   user_dict = user.dict()
+   test_param = client.get_asset_balance(asset='USDT')
    
-    return user_dict
+   return user_dict
     
 @app.post("/addBot/")
 def give_addBotData(addBot : add_bot_info):  #addBot : add_bot_info
