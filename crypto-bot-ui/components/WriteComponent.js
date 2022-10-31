@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react"; 
-import { View , StyleSheet, TextInput} from "react-native";
+import {Text, Platform, View , StyleSheet, TextInput, Keyboard, Pressable} from "react-native";
 import CustomButton from "./CustomButton";
 import api_axios from "../api/client";
-import CalculatorButton from "./CalculatorButton";
+import KeyboardView from "./keyboard/KeyboardView";
 
 function WriteComponent() {
   const [name, setName] = useState('');
@@ -11,12 +11,9 @@ function WriteComponent() {
   const name_ref = useRef();
   const amount_ref = useRef();
   const method_ref = useRef();
+  const test1 = 'test';
+
   
-  const onPress = (text) => {
-    const temp = method;
-    temp = temp + text;
-    setMethod(temp);
-  };
   const onPress_submit = () => {
     const getData = async () => {
       try {
@@ -33,6 +30,9 @@ function WriteComponent() {
     getData();
   };
 
+  const setFunction = (e) => {
+    setMethod(e);
+  }
   return (
     <View style={styles.block}>
       <TextInput
@@ -46,7 +46,7 @@ function WriteComponent() {
       <TextInput
         placeholder="amount to trading"
         style={styles.amountInput}
-        onChangeText={(amount)=> {setName(amount)}}
+        onChangeText={(amount)=> {setAmount(amount)}}
         value={amount}
         ref={amount_ref}
         onSubmitEditing={() => {method_ref.current.focus()}}
@@ -61,9 +61,20 @@ function WriteComponent() {
         textAlignVertical="top"
         onSubmitEditing={onPress_submit}
       />
-      <CalculatorButton text="(" onPress={onPress}/>
-     
-      
+      <KeyboardView  method={method} setMethod={setFunction} />
+{/*      
+      <Pressable
+        style={({ pressed }) => [
+          styles.button,
+          Platform.OS === 'ios' && {
+            opacity: pressed ? 0.6 : 1,
+          },
+        ]}
+        android_ripple={{ color: 'white' }}
+        onPress={() => setMethod((e) => e + 'test')}>
+        <Text>test</Text>
+      </Pressable> */}
+
       <View style={styles.buttons}>
         <CustomButton onPress={onPress_submit} title="Submit" hasMarginBottom />
       </View>
@@ -95,7 +106,15 @@ const styles = StyleSheet.create({
     flex : 1,
     fontSize : 16,
     paddingVertical : 10,
-    
-  }
+  },
+  button: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: 'tomato',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
 })
 export default WriteComponent;

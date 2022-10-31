@@ -64,7 +64,7 @@ def read_user(user : sign_info):
    client = Client(api_key= user.api_key, api_secret=user.secret_key)
    user_dict = user.dict()
    test_param = client.get_asset_balance(asset='USDT')
-   
+   user_dict.update({"balance" : test_param})
    return user_dict
     
 @app.post("/addBot/")
