@@ -1,6 +1,7 @@
 import React from 'react';
 import { Platform, Pressable, StyleSheet, View } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+// import Icon from 'react-native-vector-icons/MaterialIcons';
+import Ionicons from '@expo/vector-icons/Ionicons'
 import { useNavigation } from '@react-navigation/native';
 
 function FloatingWriteButton() {
@@ -21,7 +22,7 @@ function FloatingWriteButton() {
         ]}
         android_ripple={{ color: 'white' }}
         onPress={onPress}>
-        <Icon name="add" size={24} style={styles.icon} />
+        <Ionicons name="plus" size={24} color="white" />
       </Pressable>
     </View>
   );
