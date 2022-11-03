@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { StyleSheet, View, Text } from 'react-native';
+import BalanceContext from '../../contexts/BalanceContext';
 import { theme } from '../../Theme';
 
 const DATA = {
@@ -12,6 +13,8 @@ const DATA = {
 }
 
 function BotValue() {
+    const {balance, setBalance} = useContext(BalanceContext);
+    
     return (
         <View style={styles.bot_info}>
             <View style={styles.name_container}>
@@ -25,7 +28,7 @@ function BotValue() {
             <View style={styles.item_row_container}>
                 <Text style={styles.value_title_text}>Total Value</Text>
                 <View style={{ flexDirection: 'row' }}>
-                    <Text style={styles.value_amount_text}>0</Text>
+                    <Text style={styles.value_amount_text}>{balance}</Text>
                     <Text style={styles.value_unit_text}> USDT</Text>
                 </View>
             </View>

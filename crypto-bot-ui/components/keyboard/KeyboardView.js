@@ -1,22 +1,22 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet ,View} from 'react-native';
 import KeyboardCal from './KeyboardCal';
 import KeyboardMethod from './KeyboardMethod';
 
-function KeyboardView({ method, setMethod}){
-    const isCal_view = false;
+function KeyboardView(){
     
+    const [isCal_view, setIsCal] = useState(true);
 
-    const onPress_change = () => {
-        isCal_view = !isCal_view;
+    const setIs_prop = () => {
+        setIsCal(!isCal_view);
     }
 
     return(
         <View style={styles.root}>
             {isCal_view ? (
-                <KeyboardCal onPressChange={onPress_change} isCal_view={isCal_view} method={method} setMethod={setMethod}/>
+                <KeyboardMethod isCal_view={isCal_view} setIsCal={setIs_prop}/>
             ) : (
-                <KeyboardMethod  onPressChange={onPress_change} isCal_view={isCal_view} method={method} setMethod={setMethod}/>
+                <KeyboardCal isCal_view={isCal_view} setIsCal={setIs_prop}/>
             )}
         </View>
     );
@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
     root: {
         flex : 1,
         backgroundColor: 'gray',
-        flexDirection : 'row',
     },  
 });
 

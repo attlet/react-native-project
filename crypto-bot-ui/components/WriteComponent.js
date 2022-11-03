@@ -1,17 +1,19 @@
-import React, { useState, useRef } from "react"; 
+import React, { useState, useRef, useContext } from "react"; 
 import {Text, Platform, View , StyleSheet, TextInput, Keyboard, Pressable} from "react-native";
 import CustomButton from "./CustomButton";
 import api_axios from "../api/client";
 import KeyboardView from "./keyboard/KeyboardView";
+import WriteContext from "../contexts/WriteContext";
 
 function WriteComponent() {
   const [name, setName] = useState('');
   const [amount, setAmount] = useState('');
-  const [method, setMethod] = useState('');
+  // const [method, setMethod] = useState('');
   const name_ref = useRef();
   const amount_ref = useRef();
   const method_ref = useRef();
-  const test1 = 'test';
+  
+  const {method, setMethod} = useContext(WriteContext);
 
   
   const onPress_submit = () => {
@@ -32,7 +34,8 @@ function WriteComponent() {
 
   const setFunction = (e) => {
     setMethod(e);
-  }
+  };
+
   return (
     <View style={styles.block}>
       <TextInput
@@ -61,7 +64,7 @@ function WriteComponent() {
         textAlignVertical="top"
         onSubmitEditing={onPress_submit}
       />
-      <KeyboardView  method={method} setMethod={setFunction} />
+      <KeyboardView />
 {/*      
       <Pressable
         style={({ pressed }) => [
@@ -76,7 +79,7 @@ function WriteComponent() {
       </Pressable> */}
 
       <View style={styles.buttons}>
-        <CustomButton onPress={onPress_submit} title="Submit" hasMarginBottom />
+        <CustomButton onPress={onPress_submit} title="Create Bot" hasMarginBottom />
       </View>
     </View>
   );

@@ -2,10 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { StyleSheet, Text, TextInput, View, ViewComponent } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import SelectDropdown from "react-native-select-dropdown"; //npm install react-native-select-dropdown
-import api_axios from "../api/client";
-import BorderedInput from "../components/BorderedInput";
-import CustomButton from "../components/CustomButton";
 import WriteComponent from "../components/WriteComponent";
+import WriteContext, { WriteContextProvider } from "../contexts/WriteContext";
 
 function AddBotScreen() {
 
@@ -13,7 +11,9 @@ function AddBotScreen() {
 
   return (
     <SafeAreaView style={styles.root}>
-      <WriteComponent/>
+      <WriteContextProvider>
+        <WriteComponent/>
+      </WriteContextProvider>
     </SafeAreaView>
   );
 }
