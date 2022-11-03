@@ -1,12 +1,11 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useContext } from 'react';
 import {Text, StyleSheet, View, Modal, Animated, KeyboardAvoidingView, Keyboard} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
 import BorderedInput from '../components/BorderedInput';
 import CustomButton from '../components/CustomButton';
 import api_axios from '../api/client';
-import axios from "axios";
-
+import BalanceContext from '../contexts/BalanceContext';
 
 function SignInScreen() {
   const navigation = useNavigation();
@@ -14,46 +13,49 @@ function SignInScreen() {
   const [visibleModal, setvisibleModal] = useState(false);
   const [apiKey, setApiKey] = useState('');
   const [secret, setSecret] = useState('');
+  const [userValue, setUser] = useState([]);
+  const [apiError, setapiError] = useState("api 확인 중");
+
+  const {balance, setBalance} = useContext(BalanceContext);
+  
   const api_ref = useRef();
   const secret_ref = useRef();
 
-
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     const response = await axios.post(url + "/signIn")
-  //     .then(function(response){
-  //       return response;
-  //     })
-  //     .catch(function(error){
-  //       console.log(error);
-  //     });
-  //   };
-  //   getData();
-  // }, []);
-
   const onPress_logIn = () => {
+
+    setvisibleModal(true);
+
     const getData = async () => {
+
+      try {
         const response = await api_axios.post('/signIn/', {
           api_key : apiKey,
           secret_key : secret,
-        })
-        .then(function(response){
-           console.log(response);
-        })
-        .catch(function(error){
-          console.log(error);
         });
-      }
-    getData();
-    console.log(apiKey);
-    console.log(secret);
-    // setvisibleModal(true);
-    // navigation.navigate('BotList');
+        let temp = response.data.balance.free;
+        setUser(response.data); 
+        setBalance(temp);
+        setvisibleModal(false);
+       
+        console.log(response.data);
+        console.log(apiKey);
+        console.log(secret);
+        console.log(temp);
+        console.log(balance);
+        navigation.navigate('BotList');
   
+      } catch(error){
+  
+        console.log(error); 
+        setapiError("api 키 오류");
+        setTimeout(2000);
+        setvisibleModal(false);
+      }
+    }
+
+    getData();
 }
  
-
-
   return (
     <SafeAreaView style={styles.fullscreen}>
       <Modal
@@ -61,7 +63,7 @@ function SignInScreen() {
         presentationStyle='formSheet'
         visible={visibleModal} >
           <View style = {styles.modalView}>
-            <Text style={styles.modalText}>API확인 중</Text>
+            <Text style={styles.modalText}>{apiError}</Text>
           </View>
       </Modal>
       <Text style={styles.text}>Crypt-Auto</Text>

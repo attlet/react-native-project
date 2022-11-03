@@ -1,15 +1,20 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { theme } from '../../Theme';
+import BalanceContext from '../../contexts/BalanceContext';
 
 function TotalValue() {
+    const {balance, setBalance} = useContext(BalanceContext);
+    let balance_text = '';
+    balance_text = balance + ' /usdt';
+
     return (
         <View style={styles.total_info}>
             <Text style={styles.total_info_text}>Total Info</Text>
             <View style={styles.total_value_container}>
                 <View style={styles.single_value_container}>
                     <Text style={styles.value_title_text}> Total Value(USDT)</Text>
-                    <Text style={styles.value_amount_text}> 0</Text>
+                    <Text style={styles.value_amount_text}> {balance_text}</Text>
                 </View>
                 <View style={styles.single_value_container}>
                     <Text style={styles.value_title_text}> Bot Value(USDT)</Text>

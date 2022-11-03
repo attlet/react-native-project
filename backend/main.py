@@ -1,22 +1,33 @@
-from typing import Union
+from asyncio.windows_events import NULL
+from contextlib import nullcontext
+from typing import List, Union
 from fastapi import FastAPI, Request
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import Response
 from binance.client import Client
 from binance.exceptions import BinanceAPIException
+#binance new
 
 app = FastAPI()
 # api_key = 'rskXdqhCU8kLzjaHMGOvgUhZOAuUVahduosufTlJyN43RSJKdCHGe9Eow9Axleuu'
-# api_secret = 'gPGaA0gN20m31R5msnwgctAy2TQOfy55frDtZoDQx1v3l7Px08k46vMGKmxmEZz5'
-#gPGaA0gN20m31R5msnwgctAy2TQOfy55frDtZoDQx1v3l7Px08k46vMGKmxmEZz5
+# api_secret = ''
 
 # client = Client(api_key= api_key, api_secret=api_secret)
 
 class sign_info(BaseModel):
     api_key : str
     secret_key : str
+    incorrect_api :  Union[bool, None] = None
+
+class add_bot_info(BaseModel):
+    name : str
+    amount : str
+    stragies : str
+
+
     
+
 origins = [
     "http://localhost",
     "http://localhost:8080",
@@ -39,8 +50,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-
 @app.get("/")
 def read_root():
     return {"success": 1}
@@ -55,8 +64,12 @@ def read_user(user : sign_info):
    client = Client(api_key= user.api_key, api_secret=user.secret_key)
    user_dict = user.dict()
    test_param = client.get_asset_balance(asset='USDT')
-   
-   user_dict.update({"my balance" : test_param})
-   
+   user_dict.update({"balance" : test_param})
    return user_dict
     
+@app.post("/addBot/")
+def give_addBotData(addBot : add_bot_info):  #addBot : add_bot_info
+    addBot_dict = addBot.dict()
+    return addBot_dict
+
+
