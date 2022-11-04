@@ -1,17 +1,16 @@
 import React, { useEffect, useState, useRef } from "react";
 import { StyleSheet, Text, TextInput, View, ViewComponent } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import SelectDropdown from "react-native-select-dropdown"; //npm install react-native-select-dropdown
 import WriteComponent from "../components/WriteComponent";
+import WriteHeader from "../components/WriteHeader";
 import WriteContext, { WriteContextProvider } from "../contexts/WriteContext";
 
-function AddBotScreen() {
-
-  const [inputDataArray, setInputArr] = useState([]);
-
+function AddBotScreen({route}) {
+  console.log(route.params.data);
   return (
     <SafeAreaView style={styles.root}>
       <WriteContextProvider>
+        <WriteHeader onAdd={route.params.onAdd}/>
         <WriteComponent/>
       </WriteContextProvider>
     </SafeAreaView>

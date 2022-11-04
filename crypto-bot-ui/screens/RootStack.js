@@ -32,6 +32,7 @@ function RootStack() {
       <Stack.Screen
         name='AddBot'
         component={AddBotScreen}
+        options={{headerShown: false}}
       />
     </Stack.Navigator>
   );

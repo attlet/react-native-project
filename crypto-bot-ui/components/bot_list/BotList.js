@@ -1,35 +1,11 @@
-import React from 'react';
+import React, {useState, useContext} from 'react';
 import { FlatList, StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { list_theme } from '../../Theme';
+import BotContext from '../../contexts/BotContext';
 
 
-const DATA = [
-    {
-        id: 1,
-        name: 'Test Bot1',
-        type: 'type1',
-        amount: '1000',
-        pnl: '100.1',
-        roe: '10.1',
-    },
-    {
-        id: 2,
-        name: 'Test Bot2',
-        type: 'type2',
-        amount: '1000',
-        pnl: '100.1',
-        roe: '10.1',
-    },
-    {
-        id: 3,
-        name: 'Test Bot3',
-        type: 'type3',
-        amount: '1000',
-        pnl: '100.1',
-        roe: '10.1',
-    },
-];
+
 
 const Item = ({ item }) => {
     const navigation = useNavigation();
@@ -61,13 +37,15 @@ const Item = ({ item }) => {
 }
 
 function BotList() {
+    const {BotData, setBotData} = useContext(BotContext);
+
     const renderItem = ({ item }) => (
         <Item item={item} />
     );
 
     return (
         <FlatList
-            data={DATA}
+            data={BotData}
             renderItem={renderItem}
             contentContainerStyle={styles.root}
             keyExtractor={item => item.id}

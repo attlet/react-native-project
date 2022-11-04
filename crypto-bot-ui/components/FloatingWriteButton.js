@@ -1,18 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Platform, Pressable, StyleSheet, View } from 'react-native';
 // import Icon from 'react-native-vector-icons/MaterialIcons';
 import { AntDesign } from '@expo/vector-icons'; 
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import BotContext from '../contexts/BotContext';
 
-function FloatingWriteButton() {
+function FloatingWriteButton({right, bottom, icon}) {
   const navigation = useNavigation();
+  const {BotData, AddBotData} = useContext(BotContext);
+
 
   const onPress = () => {
-    navigation.navigate('AddBot');
+    navigation.navigate('AddBot', {
+      data : BotData,
+      onAdd : AddBotData,
+    });
   };
 
   return (
-    <View style={styles.wrapper}>
+    <View style={[styles.wrapper, bottom={bottom}, right={right}]}>
       <Pressable
         style={({ pressed }) => [
           styles.button,
@@ -22,7 +29,12 @@ function FloatingWriteButton() {
         ]}
         android_ripple={{ color: 'white' }}
         onPress={onPress}>
-        <AntDesign name="plus" size={24} color="black" />
+        {(icon === 'plus') ? (
+          <AntDesign name={icon} size={24} color="black" />
+        ) : (
+          <MaterialCommunityIcons name={icon} size={24} color="black"/>
+        )}
+        
       </Pressable>
     </View>
   );
@@ -31,8 +43,8 @@ function FloatingWriteButton() {
 const styles = StyleSheet.create({
   wrapper: {
     position: 'absolute',
-    bottom: 16,
-    right: 16,
+    // bottom: {bottom},
+    // right: {right},
     width: 56,
     height: 56,
     borderRadius: 28,
