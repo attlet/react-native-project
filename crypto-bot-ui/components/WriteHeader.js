@@ -18,9 +18,30 @@ function WriteHeader({ onAdd }) {
           stragies: method,
         });
         console.log("submit success: ", response.data);
+        onAdd({
+          name,
+          type: "addType",
+          amount,
+          pnl: "100",
+          roe: "15",
+          method,
+        });
+        navigation.pop();
+
       } catch (error) {
         console.log("submit error:", error);
         console.log("error data:", error.response);
+        Alert.alert(
+          "",
+          "데이터 전송 실패",
+          [
+            {
+              text: "닫기",
+              onPress: () => console.log("submit 데이터 전송 실패 닫기 실행"),
+              style: 'cancel'
+            }
+          ],
+          {cancelable: false})
       }
     };
     getData();
@@ -59,15 +80,6 @@ function WriteHeader({ onAdd }) {
       );
     } else {
       onPress_submit();
-      onAdd({
-        name,
-        type: "addType",
-        amount,
-        pnl: "100",
-        roe: "15",
-        method,
-      });
-      navigation.pop();
     }
   };
 

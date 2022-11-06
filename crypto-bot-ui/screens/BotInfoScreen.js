@@ -5,11 +5,11 @@ import BotValue from "../components/bot_info/BotValue";
 import FloatingWriteButton from "../components/FloatingWriteButton";
 import { BotContextProvider } from "../contexts/BotContext";
 
-function BotInfoScreen() {
+function BotInfoScreen({route}) {
   return (
     <View style={styles.root}>
       <BotContextProvider>
-        <BotValue />
+        <BotValue Id={route.params.id}/>
         <BotHistoryTab />
         <FloatingWriteButton right={16} bottom={16} icon="delete-off" />
       </BotContextProvider>

@@ -13,9 +13,9 @@ function KeyboardView() {
   return (
     <View style={styles.root}>
       {isCal_view ? (
-        <KeyboardMethod isCal_view={isCal_view} setIsCal={setIs_prop} />
-      ) : (
         <KeyboardCal isCal_view={isCal_view} setIsCal={setIs_prop} />
+      ) : (
+        <KeyboardMethod isCal_view={isCal_view} setIsCal={setIs_prop} />
       )}
     </View>
   );

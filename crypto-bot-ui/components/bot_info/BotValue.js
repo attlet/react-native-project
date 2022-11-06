@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import BalanceContext from '../../contexts/BalanceContext';
+import BotContext from '../../contexts/BotContext';
+
 import { theme } from '../../Theme';
 
 const DATA = {
@@ -11,14 +12,24 @@ const DATA = {
     roe: '10.1',
     status: 'running',
 }
+const arr = [2,3];
 
-function BotValue() {
-    const {balance, setBalance} = useContext(BalanceContext);
+function BotValue({Id}) {
+ 
+    const {BotData, setBotData} = useContext(BotContext);
+    const isTrueId = (data) => {
+        if(data.id === Id){
+            return true;
+        }
+    }
+    const temp_data = BotData.find(isTrueId);
     
+    console.log(temp_data);
+    console.log(Id);
     return (
         <View style={styles.bot_info}>
             <View style={styles.name_container}>
-                <Text style={styles.bot_name}>{DATA.name}</Text>
+                <Text style={styles.bot_name}>{temp_data.name}</Text>
                 <View>
                     <Text style={styles.bot_type}>{DATA.type}</Text>
                     <Text style={styles.bot_status}>{DATA.status}</Text>
@@ -28,7 +39,7 @@ function BotValue() {
             <View style={styles.item_row_container}>
                 <Text style={styles.value_title_text}>Total Value</Text>
                 <View style={{ flexDirection: 'row' }}>
-                    <Text style={styles.value_amount_text}>{balance}</Text>
+                    <Text style={styles.value_amount_text}>1000</Text>
                     <Text style={styles.value_unit_text}> USDT</Text>
                 </View>
             </View>

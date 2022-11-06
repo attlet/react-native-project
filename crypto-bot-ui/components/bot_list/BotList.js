@@ -9,11 +9,10 @@ import BotContext from '../../contexts/BotContext';
 
 const Item = ({ item }) => {
     const navigation = useNavigation();
-
     const onPress = () => {
-        navigation.navigate('BotInfo');
+        navigation.navigate('BotInfo', {id : item.id});
     };
-
+    
     return (
         <View style={styles.item_container}>
             <TouchableOpacity onPress={onPress}>
