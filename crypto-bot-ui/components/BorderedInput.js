@@ -27,4 +27,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default React.forwardRef(BorderedInput);
+export default BorderedInput;

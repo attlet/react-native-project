@@ -8,7 +8,6 @@ import {
   Pressable,
   Alert
 } from "react-native";
-import CustomButton from "./CustomButton";
 import api_axios from "../api/client";
 import KeyboardView from "./keyboard/KeyboardView";
 import WriteContext from "../contexts/WriteContext";

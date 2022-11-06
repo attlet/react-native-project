@@ -21,8 +21,12 @@ class sign_info(BaseModel):
     incorrect_api :  Union[bool, None] = None
 
 class add_bot_info(BaseModel):
+    id : str
     name : str
+    type : str
     amount : str
+    pnl : str
+    roe : str
     stragies : str
 
 

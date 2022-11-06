@@ -12,7 +12,7 @@ function BotListScreen() {
       <BotContextProvider>
         <TotalValue />
         <BotList />
-        <FloatingWriteButton right={80} bottom={16} icon="delete-off"/>
+        {/* <FloatingWriteButton right={80} bottom={16} icon="delete-off"/> */}
         <FloatingWriteButton right={16} bottom={16} icon="plus"/>
       </BotContextProvider>
     </View>

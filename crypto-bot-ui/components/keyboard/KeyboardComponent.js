@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   text: {
-    color: "white",
+    color: "black",
     fontSize: 14,
     fontWeight: "bold",
   },

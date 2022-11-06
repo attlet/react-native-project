@@ -3,6 +3,7 @@ import { View, StyleSheet, Alert } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import WriteContext from "../contexts/WriteContext";
+import api_axios from "../api/client";
 
 function WriteHeader({ onAdd }) {
   const navigation = useNavigation();
@@ -64,6 +65,7 @@ function WriteHeader({ onAdd }) {
         amount,
         pnl: "100",
         roe: "15",
+        method,
       });
       navigation.pop();
     }

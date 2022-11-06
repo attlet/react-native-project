@@ -13,6 +13,7 @@ export function BotContextProvider({children}){
             amount: "1000",
             pnl: "100.1",
             roe: "10.1",
+            method : '',
           },
           {
             id: 2,
@@ -21,6 +22,7 @@ export function BotContextProvider({children}){
             amount: "1000",
             pnl: "100.1",
             roe: "10.1",
+            method : '',
           },
           {
             id: 3,
@@ -29,6 +31,7 @@ export function BotContextProvider({children}){
             amount: "1000",
             pnl: "100.1",
             roe: "10.1",
+            method : '',
           },
     ]);
 
