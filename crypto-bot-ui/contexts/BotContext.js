@@ -7,7 +7,7 @@ const BotContext = createContext();
 export function BotContextProvider({children}){
     const [BotData, setBotData] = useState([
         {
-            id: 1,
+            id: '1',
             name: "Test Bot1",
             type: "type1",
             amount: "1000",
@@ -16,7 +16,7 @@ export function BotContextProvider({children}){
             method : '',
           },
           {
-            id: 2,
+            id: '2',
             name: "Test Bot2",
             type: "type2",
             amount: "1000",
@@ -24,18 +24,19 @@ export function BotContextProvider({children}){
             roe: "10.1",
             method : '',
           },
-          {
-            id: 3,
-            name: "Test Bot3",
-            type: "type3",
-            amount: "1000",
-            pnl: "100.1",
-            roe: "10.1",
-            method : '',
-          },
+        //   {
+        //     id: 3,
+        //     name: "Test Bot3",
+        //     type: "type3",
+        //     amount: "1000",
+        //     pnl: "100.1",
+        //     roe: "10.1",
+        //     method : '',
+        //   },
     ]);
+    const [checked, setChecked] = useState(new Set());
 
-    const AddBotData = ({name, type, amount, pnl, roe}) => {
+    const AddBotData = ({name, type, amount, pnl, roe, method}) => {
       const new_data = {
         id : uuidv4(),
         name,
@@ -43,12 +44,13 @@ export function BotContextProvider({children}){
         amount,
         pnl,
         roe,
+        method,
       };
       setBotData([...BotData, new_data])
     };
-  
-    const DeleteBotData = (name) => {          //추후 체크박스 형태로 바꿀 때 변경할 것.
-      const new_data = BotData.filter((data) => data.name !== name)
+    
+    const DeleteBotData = (id) => {          //추후 체크박스 형태로 바꿀 때 변경할 것.
+      const new_data = BotData.filter((data) => data.id !== id)
       setBotData(new_data);
     };
 
@@ -58,8 +60,20 @@ export function BotContextProvider({children}){
       })
       setBotData(new_data);
     };
+
+    const AddChecked_func = (id) => {
+      checked.add(id);
+      setChecked(checked);
+    };
+  
+    const DeleteChecked_func = (id) => {
+      checked.delete(id);
+      setChecked(checked);
+    };
+
+
     return(
-        <BotContext.Provider value={{BotData, setBotData, AddBotData, DeleteBotData, ModifyBotData}}>
+        <BotContext.Provider value={{checked, setChecked, BotData, setBotData, AddBotData, DeleteBotData, ModifyBotData, AddChecked_func, DeleteChecked_func}}>
             {children}
         </BotContext.Provider>
     );

@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     backgroundColor: "gray",
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: 'space-between',
+    justifyContent: 'space-around'
   },
   button: {},
 });

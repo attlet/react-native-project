@@ -8,11 +8,11 @@ import { BotContextProvider } from "../contexts/BotContext";
 function BotInfoScreen({route}) {
   return (
     <View style={styles.root}>
-      <BotContextProvider>
+      {/* <BotContextProvider> */}
         <BotValue Id={route.params.id}/>
         <BotHistoryTab />
         <FloatingWriteButton right={16} bottom={16} icon="delete-off" />
-      </BotContextProvider>
+      {/* </BotContextProvider> */}
     </View>
   );
 }

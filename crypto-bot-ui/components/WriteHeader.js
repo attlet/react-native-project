@@ -4,21 +4,21 @@ import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import WriteContext from "../contexts/WriteContext";
 import api_axios from "../api/client";
+import BotContext from "../contexts/BotContext";
 
-function WriteHeader({ onAdd }) {
+function WriteHeader() {
   const navigation = useNavigation();
   const { name, amount, method } = useContext(WriteContext);
+  const { BotData, AddBotData } = useContext(BotContext);
 
   const onPress_submit = () => {
+  
     const getData = async () => {
       try {
         const response = await api_axios.post("/addBot/", {
-          name: name,
-          amount: amount,
-          stragies: method,
+          bot: BotData,
         });
-        console.log("submit success: ", response.data);
-        onAdd({
+        AddBotData({
           name,
           type: "addType",
           amount,
@@ -26,11 +26,21 @@ function WriteHeader({ onAdd }) {
           roe: "15",
           method,
         });
+        console.log("submit success: ", response.data);
         navigation.pop();
-
       } catch (error) {
-        console.log("submit error:", error);
-        console.log("error data:", error.response);
+        if(error.response){
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
+        else if(error.request){
+          console.log(error.request);
+        }
+        else{
+          console.log("error : ", error.message);
+        }
+        console.log(error.config);
         Alert.alert(
           "",
           "데이터 전송 실패",
@@ -38,10 +48,11 @@ function WriteHeader({ onAdd }) {
             {
               text: "닫기",
               onPress: () => console.log("submit 데이터 전송 실패 닫기 실행"),
-              style: 'cancel'
-            }
+              style: "cancel",
+            },
           ],
-          {cancelable: false})
+          { cancelable: false }
+        );
       }
     };
     getData();

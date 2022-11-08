@@ -9,7 +9,9 @@ export default function App() {
     <SafeAreaProvider>
       <NavigationContainer>
         <BalanceContextProvider>
-          <RootStack />
+          <BotContextProvider>
+            <RootStack />
+          </BotContextProvider>
         </BalanceContextProvider>
       </NavigationContainer>
     </SafeAreaProvider>

@@ -22,7 +22,8 @@ export const list_theme = StyleSheet.create({
     },
     item_container: {
         padding: theme.padding.s,
-        borderBottomWidth: 1.5,
+        // borderBottomWidth: 1.5,
+        flex: 1,
     },
     header_container: {
         flexDirection: 'row',

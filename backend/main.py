@@ -20,17 +20,17 @@ class sign_info(BaseModel):
     secret_key : str
     incorrect_api :  Union[bool, None] = None
 
-class add_bot_info(BaseModel):
+class bot_info(BaseModel):
     id : str
     name : str
     type : str
     amount : str
     pnl : str
     roe : str
-    stragies : str
+    method : str
 
-
-    
+class bot_list(BaseModel):
+    bot : List[bot_info]
 
 origins = [
     "http://localhost",
@@ -72,7 +72,7 @@ def read_user(user : sign_info):
    return user_dict
     
 @app.post("/addBot/")
-def give_addBotData(addBot : add_bot_info):  #addBot : add_bot_info
+def give_addBotData(addBot : bot_list):  #addBot : add_bot_info
     addBot_dict = addBot.dict()
     return addBot_dict
 

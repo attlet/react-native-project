@@ -12,7 +12,6 @@ const DATA = {
     roe: '10.1',
     status: 'running',
 }
-const arr = [2,3];
 
 function BotValue({Id}) {
  
@@ -25,7 +24,6 @@ function BotValue({Id}) {
     const temp_data = BotData.find(isTrueId);
     
     console.log(temp_data);
-    console.log(Id);
     return (
         <View style={styles.bot_info}>
             <View style={styles.name_container}>
