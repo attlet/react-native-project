@@ -13,9 +13,7 @@ import KeyboardView from "./keyboard/KeyboardView";
 import WriteContext from "../contexts/WriteContext";
 
 function WriteComponent() {
-  // const [name, setName] = useState('');
-  // const [amount, setAmount] = useState('');
-  // const [method, setMethod] = useState('');
+  
   const name_ref = useRef();
   const amount_ref = useRef();
   const method_ref = useRef();

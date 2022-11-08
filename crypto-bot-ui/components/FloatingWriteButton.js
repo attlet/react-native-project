@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Platform, Pressable, StyleSheet, View } from "react-native";
+import { Alert, Platform, Pressable, StyleSheet, View } from "react-native";
 // import Icon from 'react-native-vector-icons/MaterialIcons';
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -8,28 +8,56 @@ import BotContext from "../contexts/BotContext";
 
 function FloatingWriteButton({ right, bottom, icon }) {
   const navigation = useNavigation();
-  const { checked, setChecked, BotData, setBotData, AddBotData, DeleteBotData, DeleteChecked_func} = useContext(BotContext);
+  const {
+    checked,
+    setChecked,
+    BotData,
+    setBotData,
+    AddBotData,
+    DeleteBotData,
+    DeleteChecked_func,
+  } = useContext(BotContext);
 
   useEffect(() => {
     console.log(checked);
-  }, [checked])
-  
+  }, [checked]);
+
   useEffect(() => {
     console.log(BotData);
   }, [BotData]);
 
-  const onPress = () => {
-    if (icon === "plus") {
-      navigation.navigate("AddBot", {
-        data: BotData,
-        onAdd: AddBotData,
-      });
-    } else {
-      const temp = checked;
-      const new_data = BotData.filter((data) => !checked.has(data.id));
-      setBotData(new_data);
-      setChecked(new Set());
-    }
+  const onPress_add = () => {
+    navigation.navigate("AddBot", {
+      data: BotData,
+      onAdd: AddBotData,
+    });
+  };
+
+  const onPress_delete = () => {
+    const temp = checked;
+    const new_data = BotData.filter((data) => !checked.has(data.id));
+    setBotData(new_data);
+    setChecked(new Set());
+  };
+  
+  const onPrss_askdelete = () => {
+    Alert.alert(
+      "선택한 봇들을 삭제하겠습니까?",
+      "",
+      [
+        {text: "cancel", style: 'cancel'},
+        {
+          text: "delete",
+          onPress: () => {
+            onPress_delete();
+        },
+          style: 'destructive',
+        },
+      ],
+      {
+        cancelable: true
+      }
+    );
   };
 
   return (
@@ -42,7 +70,7 @@ function FloatingWriteButton({ right, bottom, icon }) {
           },
         ]}
         android_ripple={{ color: "white" }}
-        onPress={onPress}
+        onPress={icon === "plus" ? onPress_add : onPrss_askdelete}
       >
         {icon === "plus" ? (
           <AntDesign name={icon} size={24} color="black" />

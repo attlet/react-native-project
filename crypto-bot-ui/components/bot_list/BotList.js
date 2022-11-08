@@ -113,7 +113,7 @@ const styles_add = StyleSheet.create({
   checkedCircle: {
     backgroundColor: "tomato",
     justifyContent: "center",
-    alignItems: " center",
+    alignItems: "center",
   },
   list: {
     flex: 1,

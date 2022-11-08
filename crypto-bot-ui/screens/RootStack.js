@@ -22,7 +22,7 @@ function RootStack() {
       <Stack.Screen
         name='BotList'
         component={BotListScreen}
-        options={{ title: 'Bot List' }}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name='BotInfo'
