@@ -1,12 +1,10 @@
 import React from 'react';
 import {TextInput, StyleSheet} from 'react-native';
 
-function BorderedInput({hasMarginBottom, ...rest}, ref, onSubmit) {
-  return (
+function BorderedInput({hasMarginBottom, ...rest}) {  //, ref, onSubmit
+  return ( 
     <TextInput
       style={[styles.input, hasMarginBottom && styles.margin]}
-      ref={ref}
-      onSubmitEditing={onSubmit}
       {...rest}
       
     />
@@ -27,4 +25,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BorderedInput;
+export default React.forwardRef(BorderedInput);
