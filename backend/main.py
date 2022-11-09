@@ -9,8 +9,8 @@ from binance.exceptions import BinanceAPIException
 #binance new
 
 app = FastAPI()
-api_key = 'rskXdqhCU8kLzjaHMGOvgUhZOAuUVahduosufTlJyN43RSJKdCHGe9Eow9Axleuu'
-api_secret = 'gPGaA0gN20m31R5msnwgctAy2TQOfy55frDtZoDQx1v3l7Px08k46vMGKmxmEZz5'
+# api_key = 'rskXdqhCU8kLzjaHMGOvgUhZOAuUVahduosufTlJyN43RSJKdCHGe9Eow9Axleuu'
+# api_secret = ''
 
 # client = Client(api_key= api_key, api_secret=api_secret)
 
@@ -64,8 +64,8 @@ def read_item(item_id: int, q: Union[str, None] = None):
 
 @app.post("/signIn")
 def read_user(user : sign_info):
-   #client = Client(api_key= user.api_key, api_secret=user.secret_key)
-   client = Client(api_key= api_key, api_secret=api_secret)
+   client = Client(api_key= user.api_key, api_secret=user.secret_key)
+#    client = Client(api_key= api_key, api_secret=api_secret)
    user_dict = user.dict()
    test_param = client.get_asset_balance(asset='USDT')
    user_dict.update({"balance" : test_param})

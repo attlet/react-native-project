@@ -6,24 +6,24 @@ const BotContext = createContext();
 
 export function BotContextProvider({children}){
     const [BotData, setBotData] = useState([
-        {
-            id: '1',
-            name: "Test Bot1",
-            type: "type1",
-            amount: "1000",
-            pnl: "100.1",
-            roe: "10.1",
-            method : '',
-          },
-          {
-            id: '2',
-            name: "Test Bot2",
-            type: "type2",
-            amount: "1000",
-            pnl: "100.1",
-            roe: "10.1",
-            method : '',
-          },
+        // {
+        //     id: '1',
+        //     name: "Test Bot1",
+        //     type: "type1",
+        //     amount: "1000",
+        //     pnl: "100.1",
+        //     roe: "10.1",
+        //     method : '',
+        //   },
+        //   {
+        //     id: '2',
+        //     name: "Test Bot2",
+        //     type: "type2",
+        //     amount: "1000",
+        //     pnl: "100.1",
+        //     roe: "10.1",
+        //     method : '',
+        //   },
         //   {
         //     id: 3,
         //     name: "Test Bot3",
