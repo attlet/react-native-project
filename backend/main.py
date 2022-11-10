@@ -22,11 +22,11 @@ class sign_info(BaseModel):
 class bot_info(BaseModel):
     id : str
     name : str
-    type : str
     amount : str
     pnl : str
     roe : str
     method : str
+    status : str
 
 class bot_list(BaseModel):
     bot : List[bot_info]

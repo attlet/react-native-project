@@ -11,12 +11,13 @@ import { list_theme } from "../../Theme";
 import BotContext from "../../contexts/BotContext";
 import Empty from "./Empty";
 import { AntDesign } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Item = ({ item, AddChecked_func, DeleteChecked_func, checked }) => {
   const navigation = useNavigation();
   const [clickCircle, setClickCircle] = useState(false);
   const onPress = () => {
-    navigation.navigate("BotInfo", { id: item.id });
+    navigation.navigate("BotInfo", { id: item.id, status: item.status });
   };
 
   useEffect(() => {
@@ -25,8 +26,6 @@ const Item = ({ item, AddChecked_func, DeleteChecked_func, checked }) => {
     } else {
       DeleteChecked_func(item.id);
     }
-    console.log(clickCircle);
-    console.log(checked);
   }, [clickCircle]);
 
   const onPress_check = () => {
@@ -45,7 +44,8 @@ const Item = ({ item, AddChecked_func, DeleteChecked_func, checked }) => {
         <TouchableOpacity onPress={onPress}>
           <View style={styles.header_container}>
             <Text style={styles.symbol_text}>{item.name}</Text>
-            <Text style={styles.title_text}>{item.type}</Text>
+            {/* <Text style={styles.title_text}>{item.type}</Text> */}
+            <Text style={[styles.title_text, item.status === "stop" ? styles_add.type_stop : styles_add.type_running ]}>{item.status}</Text>
           </View>
           <View style={styles.row_container}>
             <View>
@@ -66,8 +66,31 @@ const Item = ({ item, AddChecked_func, DeleteChecked_func, checked }) => {
 };
 
 function BotList() {
-  const { checked, BotData, AddChecked_func, DeleteChecked_func } =
+  const { checked, BotData, setBotData, AddChecked_func, DeleteChecked_func } =
     useContext(BotContext);
+
+  // useEffect(() => {
+  //   async function load_BotData() {
+  //     try {
+  //       const temp_BotData = await AsyncStorage.getItem("BotData");
+  //       setBotData(temp_BotData);
+  //     } catch (e) {
+  //       console.log("Failed to load api key: ", e);
+  //     }
+  //   }
+  //   load_BotData();
+  // }, []);
+
+  // useEffect(() => {
+  //   async function save_BotData() {
+  //     try {
+  //       await AsyncStorage.setItem("BotData", BotData);
+  //     } catch (e) {
+  //       console.log("Failed to save api key: ", e);
+  //     }
+  //   }
+  //   save_BotData();
+  // }, [BotData]);
 
   const renderItem = ({ item }) => (
     <Item
@@ -77,9 +100,10 @@ function BotList() {
       checked={checked}
     />
   );
-
+  
   return (
     <>
+      
       {BotData.length === 0 ? (
         <Empty />
       ) : (
@@ -121,6 +145,16 @@ const styles_add = StyleSheet.create({
   seperator: {
     backgroundColor: "#9e9e9e",
     height: 1,
+  },
+  type_stop: {
+    color: 'red',
+    fontWeight: 'bold',
+    fontSize: 18
+  },
+  type_running: {
+    color: 'green',
+    fontWeight: 'bold',
+    fontSize: 18
   },
 });
 export default BotList;

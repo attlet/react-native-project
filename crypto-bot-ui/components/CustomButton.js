@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   primaryWrapper: {
-    backgroundColor: '#6200ee',
+    backgroundColor: 'tomato',
   },
   text: {
     fontWeight: 'bold',

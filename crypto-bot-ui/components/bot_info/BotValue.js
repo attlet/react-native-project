@@ -21,15 +21,16 @@ function BotValue({Id}) {
             return true;
         }
     }
+
     const temp_data = BotData.find(isTrueId);
     
-    console.log(temp_data);
+    
     return (
         <View style={styles.bot_info}>
             <View style={styles.name_container}>
                 <Text style={styles.bot_name}>{temp_data.name}</Text>
                 <View>
-                    <Text style={styles.bot_type}>{DATA.type}</Text>
+                    {/* <Text style={styles.bot_type}>{DATA.type}</Text> */}
                     <Text style={styles.bot_status}>{DATA.status}</Text>
                 </View>
             </View>

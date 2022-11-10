@@ -12,32 +12,30 @@ function WriteHeader() {
   const { BotData, AddBotData } = useContext(BotContext);
 
   const onPress_submit = () => {
-  
     const getData = async () => {
       try {
+        AddBotData({
+          name,
+          amount,
+          pnl: 0,
+          roe: 0,
+          method,
+          status: "stop",
+        });
         const response = await api_axios.post("/addBot/", {
           bot: BotData,
         });
-        AddBotData({
-          name,
-          type: "addType",
-          amount,
-          pnl: "100",
-          roe: "15",
-          method,
-        });
+
         console.log("submit success: ", response.data);
         navigation.pop();
       } catch (error) {
-        if(error.response){
+        if (error.response) {
           console.log(error.response.data);
           console.log(error.response.status);
           console.log(error.response.headers);
-        }
-        else if(error.request){
+        } else if (error.request) {
           console.log(error.request);
-        }
-        else{
+        } else {
           console.log("error : ", error.message);
         }
         console.log(error.config);
