@@ -14,6 +14,9 @@ function WriteHeader() {
   const onPress_submit = () => {
     const getData = async () => {
       try {
+        const response = await api_axios.post("/addBot/", {
+          bot: BotData,
+        });
         AddBotData({
           name,
           amount,
@@ -22,10 +25,6 @@ function WriteHeader() {
           method,
           status: "stop",
         });
-        const response = await api_axios.post("/addBot/", {
-          bot: BotData,
-        });
-
         console.log("submit success: ", response.data);
         navigation.pop();
       } catch (error) {

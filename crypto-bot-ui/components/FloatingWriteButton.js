@@ -18,13 +18,7 @@ function FloatingWriteButton({ right, bottom, icon }) {
     DeleteChecked_func,
   } = useContext(BotContext);
 
-  useEffect(() => {
-    console.log(checked);
-  }, [checked]);
-
-  useEffect(() => {
-    console.log(BotData);
-  }, [BotData]);
+  
 
   const onPress_add = () => {
     navigation.navigate("AddBot", {

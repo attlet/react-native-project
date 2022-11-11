@@ -20,13 +20,13 @@ class sign_info(BaseModel):
     incorrect_api :  Union[bool, None] = None
 
 class bot_info(BaseModel):
-    id : str
-    name : str
-    amount : str
-    pnl : str
-    roe : str
-    method : str
-    status : str
+    id : Union[str, None] = None
+    name : Union[str, None] = None
+    amount : Union[str, None] = None
+    pnl : Union[str, None] = None
+    roe : Union[str, None] = None
+    method : Union[str, None] = None
+    status : Union[str, None] = None
 
 class bot_list(BaseModel):
     bot : List[bot_info]

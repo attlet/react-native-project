@@ -16,6 +16,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const Item = ({ item, AddChecked_func, DeleteChecked_func, checked }) => {
   const navigation = useNavigation();
   const [clickCircle, setClickCircle] = useState(false);
+  const {BotData, setBotData} = useContext(BotContext);
+
   const onPress = () => {
     navigation.navigate("BotInfo", { id: item.id, status: item.status });
   };
@@ -69,28 +71,7 @@ function BotList() {
   const { checked, BotData, setBotData, AddChecked_func, DeleteChecked_func } =
     useContext(BotContext);
 
-  // useEffect(() => {
-  //   async function load_BotData() {
-  //     try {
-  //       const temp_BotData = await AsyncStorage.getItem("BotData");
-  //       setBotData(temp_BotData);
-  //     } catch (e) {
-  //       console.log("Failed to load api key: ", e);
-  //     }
-  //   }
-  //   load_BotData();
-  // }, []);
-
-  // useEffect(() => {
-  //   async function save_BotData() {
-  //     try {
-  //       await AsyncStorage.setItem("BotData", BotData);
-  //     } catch (e) {
-  //       console.log("Failed to save api key: ", e);
-  //     }
-  //   }
-  //   save_BotData();
-  // }, [BotData]);
+ 
 
   const renderItem = ({ item }) => (
     <Item
@@ -103,7 +84,6 @@ function BotList() {
   
   return (
     <>
-      
       {BotData.length === 0 ? (
         <Empty />
       ) : (

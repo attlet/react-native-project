@@ -4,7 +4,7 @@ import axios from "axios";
 //     ? 'http://localhost:8000'
 //     : 'http://3.38.117.74'
 
-const baseURL = "http://3.35.229.18";
+const baseURL = "http://3.39.96.37";
 
 const api_axios = axios.create({
   baseURL: baseURL,
