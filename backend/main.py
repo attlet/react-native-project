@@ -87,12 +87,20 @@ app.add_middleware(
 
 @app.post("/signIn")
 def read_user(user: sign_info):
-   client = Client(api_key=user.api_key, api_secret=user.secret_key)
-#    client = Client(api_key= api_key, api_secret=api_secret)
-   user_dict = user.dict()
-   test_param = client.get_asset_balance(asset='USDT')
-   user_dict.update({"balance": test_param})
-   return user_dict
+    
+    binance = ccxt.binance(config={
+    'apiKey': user.api_key,
+    'secret': user.secret_key,
+    'enableRateLimit': True,
+    'options': {
+        'defaultType': 'future'
+     }
+    })
+# client = Client(api_key= api_key, api_secret=api_secret)
+    user_dict = user.dict()
+    test_param = binance.fetch_balance()
+    user_dict.update({"balance": test_param["USDT"]["total"]})
+    return user_dict
 
 
 @app.post("/addBot")
@@ -134,7 +142,7 @@ def trading(user: sign_info, status : bool, standard_balance : str):
        
         now = datetime.datetime.now()
 
-        if now.hour == 18 and now.minute == 50 and (0 <= now.second < 10):
+        if now.hour == 19 and now.minute == 40 and (0 <= now.second < 10):
             if op_mode and position['type'] is not None:
                 end_position = bot.exit_position(binance, symbol, position)
                 balance = binance.fetch_balance()
@@ -149,7 +157,7 @@ def trading(user: sign_info, status : bool, standard_balance : str):
                 op_mode = False         # 9시 까지는 다시 포지션 진입하지 않음 
 
     # udpate target price
-        if now.hour == 19 and now.minute == 0 and (20 <= now.second < 30):
+        if now.hour == 19 and now.minute == 30 and (20 <= now.second < 30):
             long_target, short_target = bot.cal_target(binance, symbol)
             balance = binance.fetch_balance()
             usdt = balance['total']['USDT']

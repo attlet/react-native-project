@@ -41,7 +41,7 @@ function SignInScreen() {
           api_key: apiKey,
           secret_key: secret,
         });
-        let temp = response.data.balance.free;
+        let temp = response.data.balance;
         setUser(response.data);
         setBalance(temp);
         setvisibleModal(false);

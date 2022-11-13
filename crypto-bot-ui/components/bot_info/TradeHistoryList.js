@@ -87,6 +87,7 @@ function TradeHistoryList() {
   const renderItem = ({ item }) => <Item item={item} />;
 
   useEffect(() => {
+    console.log("load call");
     async function load_trade_log() {
       try {
         const response = await api_axios.get("/trade_log");

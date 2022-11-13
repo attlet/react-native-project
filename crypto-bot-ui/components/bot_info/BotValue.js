@@ -31,14 +31,14 @@ function BotValue({Id}) {
                 <Text style={styles.bot_name}>{temp_data.name}</Text>
                 <View>
                     {/* <Text style={styles.bot_type}>{DATA.type}</Text> */}
-                    <Text style={styles.bot_status}>{DATA.status}</Text>
+                    <Text style={styles.bot_status}>{temp_data.status}</Text>
                 </View>
             </View>
             <View style={{ paddingTop: theme.padding.s, borderBottomWidth: 1.5 }} />
             <View style={styles.item_row_container}>
                 <Text style={styles.value_title_text}>Total Value</Text>
                 <View style={{ flexDirection: 'row' }}>
-                    <Text style={styles.value_amount_text}>1000</Text>
+                    <Text style={styles.value_amount_text}>{temp_data.amount}</Text>
                     <Text style={styles.value_unit_text}> USDT</Text>
                 </View>
             </View>
@@ -46,7 +46,7 @@ function BotValue({Id}) {
                 <Text style={styles.value_title_text}>Today's PNL/ROE</Text>
                 <View>
                     <View style={{ flexDirection: 'row' }}>
-                        <Text style={styles.value_unit_text}>0/0%</Text>
+                        <Text style={styles.value_unit_text}>{temp_data.roe}/{temp_data.pnl}%</Text>
                     </View>
                 </View>
             </View>
