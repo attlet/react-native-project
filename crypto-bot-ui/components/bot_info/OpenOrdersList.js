@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext, useState, useCallback } from 'react';
 import { FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native';
+import BotContext from '../../contexts/BotContext';
 import { list_theme, theme } from '../../Theme';
 
 const DATA = [
@@ -16,14 +17,16 @@ const DATA = [
 ];
 
 const Item = ({ item }) => {
+    
+
     return (
         <View style={styles.item_container}>
             <View style={styles.header_container}>
-                <Text style={styles.symbol_text}>{item.symbol}</Text>
+                <Text style={styles.symbol_text}>BTC/USDT</Text>
                 <Text style={styles.title_text}>{item.time}</Text>
             </View>
             <View style={styles.row_container}>
-                <Text style={styles.content_text}>{item.orderType} / {item.positionSide}</Text>
+                <Text style={styles.content_text}>{item.positionSide}</Text>
             </View>
             <View style={styles.row_container}>
                 <View>
@@ -44,17 +47,17 @@ const wait = (timeout) => {
 }
 
 function OpenOrderList() {
-    const [refreshing, setRefreshing] = React.useState(false);
+    const [refreshing, setRefreshing] = useState(false);
 
-    const onRefresh = React.useCallback(() => {
+    const onRefresh = useCallback(() => {
         setRefreshing(true);
         wait(200).then(() => setRefreshing(false));
     }, []);
 
     const renderItem = ({ item }) => (
         <Item item={item} />
-    );
-
+    )
+    
     return (
         <FlatList
             data={DATA}

@@ -1,3 +1,5 @@
 fastapi
 python-binance
 uvicorn[standard]
+sqlalchemy
+pandas

@@ -15,18 +15,20 @@ import CustomButton from "../components/CustomButton";
 import api_axios from "../api/client";
 import BalanceContext from "../contexts/BalanceContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import BotContext from "../contexts/BotContext";
 
 function SignInScreen() {
   const navigation = useNavigation();
 
   const [visibleModal, setvisibleModal] = useState(false);
-  const [apiKey, setApiKey] = useState("");
-  const [secret, setSecret] = useState("");
+  // const [apiKey, setApiKey] = useState("");
+  // const [secret, setSecret] = useState("");
   const [userValue, setUser] = useState([]);
   const [apiError, setapiError] = useState("api 확인 중");
 
   const { balance, setBalance } = useContext(BalanceContext);
-
+  const {apiKey, setApiKey, secret, setSecret} = useContext(BotContext);
+  
   const api_ref = useRef();
   const secret_ref = useRef();
 

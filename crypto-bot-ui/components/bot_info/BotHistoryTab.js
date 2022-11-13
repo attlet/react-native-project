@@ -8,9 +8,9 @@ const Tab = createMaterialTopTabNavigator();
 function BotHistoryTab() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Open Orders" component={OpenOrdersList} />
-      <Tab.Screen name="Positions" component={PositionsList} />
-      <Tab.Screen name="Trade History" component={TradeHistoryList} />
+      <Tab.Screen name="Open Orders" component={OpenOrdersList} options={{umountOnBlur: true}}/>
+      <Tab.Screen name="Positions" component={PositionsList} options={{umountOnBlur: true}}/>
+      <Tab.Screen name="Trade History" component={TradeHistoryList} options={{umountOnBlur: true}}/>
     </Tab.Navigator>
   );
 }

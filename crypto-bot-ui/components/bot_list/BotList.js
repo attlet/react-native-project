@@ -11,7 +11,7 @@ import { list_theme } from "../../Theme";
 import BotContext from "../../contexts/BotContext";
 import Empty from "./Empty";
 import { AntDesign } from "@expo/vector-icons";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 const Item = ({ item, AddChecked_func, DeleteChecked_func, checked }) => {
   const navigation = useNavigation();
