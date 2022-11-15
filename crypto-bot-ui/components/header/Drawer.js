@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer'
 import BotListScreen from "../../screens/BotListScreen";
 import CryptoTracker from "../../screens/CryptoTracker";
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 const Drawer = createDrawerNavigator();
 

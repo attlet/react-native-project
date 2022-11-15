@@ -101,7 +101,6 @@ def read_user(user: sign_info):
     user_dict = user.dict()
     test_param = binance.fetch_balance()
     user_dict.update({"balance": test_param["USDT"]["total"]})
-    print(test_param)
     return user_dict
 
 

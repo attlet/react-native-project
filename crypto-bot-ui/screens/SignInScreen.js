@@ -51,7 +51,8 @@ function SignInScreen() {
         console.log(secret);
         console.log(temp);
         console.log(balance);
-        navigation.navigate("BotList");
+        navigation.navigate("CryptoView");
+        //navigation.navigate("BotList");
       } catch (error) {
         if (error.response) {
           if (error.response) {
