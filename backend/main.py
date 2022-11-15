@@ -22,6 +22,7 @@ TradeLog = []
 OrderLog = []
 Status = bool
 
+
 class sign_info(BaseModel):
     api_key: str
     secret_key: str
@@ -100,6 +101,7 @@ def read_user(user: sign_info):
     user_dict = user.dict()
     test_param = binance.fetch_balance()
     user_dict.update({"balance": test_param["USDT"]["total"]})
+    print(test_param)
     return user_dict
 
 

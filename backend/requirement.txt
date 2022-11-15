@@ -3,3 +3,4 @@ python-binance
 uvicorn[standard]
 sqlalchemy
 pandas
+ccxt
