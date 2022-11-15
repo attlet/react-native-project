@@ -22,17 +22,6 @@ TradeLog = []
 OrderLog = []
 Status = bool
 
-binance = ccxt.binance(config={
-    'apiKey': "rskXdqhCU8kLzjaHMGOvgUhZOAuUVahduosufTlJyN43RSJKdCHGe9Eow9Axleuu",
-    'secret': "gPGaA0gN20m31R5msnwgctAy2TQOfy55frDtZoDQx1v3l7Px08k46vMGKmxmEZz5",
-    'enableRateLimit': True,
-    'options': {
-        'defaultType': 'future'
-     }
-    })
-
-test_param = binance.fetch_balance()
-print(test_param)
 
 class sign_info(BaseModel):
     api_key: str
@@ -110,8 +99,8 @@ def read_user(user: sign_info):
     })
 # client = Client(api_key= api_key, api_secret=api_secret)
     user_dict = user.dict()
-    test_param = binance.fetch_balance()
-    user_dict.update({"balance": test_param["USDT"]["total"]})
+    # test_param = binance.fetch_balance()
+    # user_dict.update({"balance": test_param["USDT"]["total"]})
     return user_dict
 
 
