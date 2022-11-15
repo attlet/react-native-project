@@ -22,6 +22,17 @@ TradeLog = []
 OrderLog = []
 Status = bool
 
+binance = ccxt.binance(config={
+    'apiKey': "rskXdqhCU8kLzjaHMGOvgUhZOAuUVahduosufTlJyN43RSJKdCHGe9Eow9Axleuu",
+    'secret': "gPGaA0gN20m31R5msnwgctAy2TQOfy55frDtZoDQx1v3l7Px08k46vMGKmxmEZz5",
+    'enableRateLimit': True,
+    'options': {
+        'defaultType': 'future'
+     }
+    })
+
+test_param = binance.fetch_balance()
+print(test_param)
 
 class sign_info(BaseModel):
     api_key: str
