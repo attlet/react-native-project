@@ -11,15 +11,15 @@ const Stack = createNativeStackNavigator();
 function RootStack() {
   return (
     <Stack.Navigator
-      initialRouteName='SignInScreen'
+      initialRouteName='CryptoView'
       headerMode='none'
       screenOptions={{}}
     >
-      <Stack.Screen
+      {/* <Stack.Screen
         name='SignInScreen'
         component={SignInScreen}
         options={{title: 'sign in'}}
-        />
+        /> */}
       <Stack.Screen
         name='BotList'
         component={BotListScreen}

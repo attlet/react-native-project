@@ -7,6 +7,7 @@ import { BotContextProvider } from "../contexts/BotContext";
 import BotListHeader from "../components/bot_list/BotListHeader";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+
 function BotListScreen() {
 
   return (
@@ -18,6 +19,7 @@ function BotListScreen() {
         <BotList />
         <FloatingWriteButton right={90} bottom={16} icon="delete-off" />
         <FloatingWriteButton right={16} bottom={16} icon="plus" />
+  
         {/* </BotContextProvider> */}
       </View>
     </SafeAreaView>

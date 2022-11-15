@@ -8,7 +8,7 @@ import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
 export default function App() {
   return (
-    <BottomSheetModalProvider>
+    // <BottomSheetModalProvider>
       <SafeAreaProvider>
         <NavigationContainer>
           <BalanceContextProvider>
@@ -19,6 +19,6 @@ export default function App() {
           </BalanceContextProvider>
         </NavigationContainer>
       </SafeAreaProvider>
-    </BottomSheetModalProvider>
+    // </BottomSheetModalProvider>
   );
 }

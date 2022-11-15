@@ -27,7 +27,7 @@ function BotListHeader() {
 
  
   return (
-    <View style={styles.block}>\
+    <View style={styles.block}>
       <MaterialIcons name="logout" size={24} color="black" onPress={onPress} style={styles.icon} />
     </View>
   );

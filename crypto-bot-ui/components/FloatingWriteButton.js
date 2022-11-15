@@ -26,7 +26,6 @@ function FloatingWriteButton({ right, bottom, icon }) {
       onAdd: AddBotData,
     });
   };
-
   const onPress_delete = () => {
     const temp = checked;
     const new_data = BotData.filter((data) => !checked.has(data.id));

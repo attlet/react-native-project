@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Image, Text } from "react-native";
 
 function CardList({ name, symbol, cur_price, percentage, logoURL, onPress }) {
 
@@ -7,17 +7,17 @@ function CardList({ name, symbol, cur_price, percentage, logoURL, onPress }) {
 
   return (
     <TouchableOpacity onPress={onPress}>
-      <View style={styles.container}>
+      <View style={styles.itemWrapper}>
         <View style={styles.leftWrapper}>
           <Image source={{ uri: logoURL }} style={styles.image} />
-          <View style={titleWrapper}>
+          <View style={styles.titleWrapper}>
             <Text style={styles.title}>{name}</Text>
             <Text style={styles.subtitle}>{symbol.toUpperCase()}</Text>
           </View>
         </View>
 
-        <View style={rightWrapper}>
-          <Text style={styles.title}>${currentPrice.toLocaleString('en-US', { currency: 'USD' })}</Text>
+        <View style={styles.rightWrapper}>
+          <Text style={styles.title}>${cur_price.toLocaleString('en-US', { currency: 'USD' })}</Text>
           <Text style={[styles.subtitle, { color: priceChangeColor }]}>{percentage.toFixed(2)}%</Text>
         </View>
       </View>
@@ -26,8 +26,7 @@ function CardList({ name, symbol, cur_price, percentage, logoURL, onPress }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  itemWrapper: {
     paddingHorizontal: 16,
     marginTop: 24,
     flexDirection: "row",
