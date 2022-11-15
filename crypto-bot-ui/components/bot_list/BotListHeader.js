@@ -3,6 +3,7 @@ import { View, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
+
 function BotListHeader() {
   const navigation = useNavigation();
 
@@ -23,8 +24,10 @@ function BotListHeader() {
       }
     );
   };
+
+ 
   return (
-    <View style={styles.block}>
+    <View style={styles.block}>\
       <MaterialIcons name="logout" size={24} color="black" onPress={onPress} style={styles.icon} />
     </View>
   );
@@ -36,7 +39,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "flex-end",
+    justifyContent: "space-between",
   },
   icon: {
     marginHorizontal: 8

@@ -6,14 +6,6 @@ function KeyboardCal({ isCal_view, setIsCal }) {
   return (
     <ScrollView>
       <View style={styles.root}>
-        <KeyboardComponent title="+" />
-        <KeyboardComponent title="-" />
-        <KeyboardComponent title="*" />
-        <KeyboardComponent title="/" />
-        <KeyboardComponent title="%" />
-        <KeyboardComponent title="=" />
-        <KeyboardComponent title="(" />
-        <KeyboardComponent title=")" />
         <KeyboardComponent title="1" />
         <KeyboardComponent title="2" />
         <KeyboardComponent title="3" />
@@ -24,6 +16,15 @@ function KeyboardCal({ isCal_view, setIsCal }) {
         <KeyboardComponent title="8" />
         <KeyboardComponent title="9" />
         <KeyboardComponent title="0" />
+        <KeyboardComponent title="+" />
+        <KeyboardComponent title="-" />
+        <KeyboardComponent title="*" />
+        <KeyboardComponent title="/" />
+        <KeyboardComponent title="%" />
+        <KeyboardComponent title="=" />
+        <KeyboardComponent title="(" />
+        <KeyboardComponent title=")" />
+       
         <KeyboardComponent
           title="Change"
           isCal_view={isCal_view}
