@@ -10,6 +10,7 @@ import {
 import BotListScreen from "../../screens/BotListScreen";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Tracker from "../../screens/Tracker";
+import RootStack from "../../screens/RootStack";
 
 const Drawer = createDrawerNavigator();
 
@@ -57,15 +58,17 @@ function DrawerHeader() {
         },
         headerTitle: "",
       }}
+      initialRouteName="Bot List"     
     >
       <Drawer.Screen
         name="Bot List"
-        component={BotListScreen}
+        component={RootStack}
         options={{
           headerTitleAlign: "center",
           headerRight: () => <HeaderRight onPress={onPress} />,
           headerRightContainerStyle: { paddingRight: 10 },
           headerLeftContainerStyle: { paddingRight: 10 },
+        
         }}
       />
       <Drawer.Screen
@@ -98,8 +101,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   icon: {
-    marginHorizontal: 8,
+    marginHorizontal: 20,
   },
+  header : {
+    marginBottom : 20,
+  }
 });
 
 export default DrawerHeader;

@@ -11,15 +11,15 @@ function AddBotScreen({ route }) {
   return (
     <SafeAreaView style={styles.root}>
       {/* <BotContextProvider> */}
-        <WriteContextProvider>
-          <KeyboardAvoidingView
-            style={styles.avoid}
-            behavior={Platform.OS === "ios" ? "padding" : undefined}
-          >
-            <WriteHeader />
-            <WriteComponent />
-          </KeyboardAvoidingView>
-        </WriteContextProvider>
+
+      <KeyboardAvoidingView
+        style={styles.avoid}
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
+      >
+        <WriteHeader />
+        <WriteComponent />
+      </KeyboardAvoidingView>
+
       {/* </BotContextProvider> */}
     </SafeAreaView>
   );

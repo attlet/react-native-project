@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Alert, Platform, Pressable, StyleSheet, View } from "react-native";
 // import Icon from 'react-native-vector-icons/MaterialIcons';
 import { AntDesign } from "@expo/vector-icons";
@@ -6,7 +6,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import BotContext from "../contexts/BotContext";
 
-function FloatingWriteButton({ right, bottom, icon }) {
+function FloatingWriteButton({  right, bottom, icon }) {
   const navigation = useNavigation();
   const {
     checked,
@@ -51,6 +51,7 @@ function FloatingWriteButton({ right, bottom, icon }) {
         cancelable: true
       }
     );
+    
   };
 
   return (

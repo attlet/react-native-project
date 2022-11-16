@@ -7,7 +7,7 @@ import BotContext from "../contexts/BotContext";
 import BalanceContext from "../contexts/BalanceContext";
 import api_axios from "../api/client";
 
-function FloatingRunButton({ Id, right, bottom }) {
+function FloatingRunButton({ Id, right, bottom, visible, setvisible }) {
   const navigation = useNavigation();
   const {
     checked,
@@ -159,6 +159,7 @@ function FloatingRunButton({ Id, right, bottom }) {
     //     cancelable: true,
     //   }
     // );
+    setvisible(true);
     setStatus_run();
   };
 

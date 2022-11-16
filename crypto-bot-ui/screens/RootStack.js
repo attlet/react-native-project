@@ -12,7 +12,7 @@ const Stack = createNativeStackNavigator();
 function RootStack() {
   return (
     <Stack.Navigator
-      initialRouteName='CryptoView'
+      initialRouteName='BotList'
       headerMode='none'
       screenOptions={{}}
     >

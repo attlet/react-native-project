@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     total_info: {
         backgroundColor: theme.color.value_info,
         padding: theme.padding.l,
+    
     },
     total_info_text: {
         fontSize: theme.fontSize.m,
