@@ -8,7 +8,7 @@ import BotContext from "../contexts/BotContext";
 
 function WriteHeader() {
   const navigation = useNavigation();
-  const { name, amount, method } = useContext(WriteContext);
+  const { name, amount, method , stoploss} = useContext(WriteContext);
   const { BotData, AddBotData } = useContext(BotContext);
 
   const onPress_submit = () => {
@@ -20,6 +20,7 @@ function WriteHeader() {
         AddBotData({
           name,
           amount,
+          stoploss,
           pnl: 0,
           roe: 0,
           method,

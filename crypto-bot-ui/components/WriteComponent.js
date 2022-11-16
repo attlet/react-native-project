@@ -17,8 +17,9 @@ function WriteComponent() {
   const name_ref = useRef();
   const amount_ref = useRef();
   const method_ref = useRef();
+  const stoploss_ref = useRef();
 
-  const { name, amount, method, setName, setAmount, setMethod } = useContext(WriteContext);
+  const { name, amount, method, stoploss, setName, setAmount, setMethod, setStoploss} = useContext(WriteContext);
 
   const onPress_submit = () => {
     if (name.length < 2) {
@@ -93,6 +94,18 @@ function WriteComponent() {
         }}
         value={amount}
         ref={amount_ref}
+        onSubmitEditing={() => {
+          stoploss_ref.current.focus();
+        }}
+      />
+      <TextInput
+        placeholder="stoploss"
+        style={styles.amountInput}
+        onChangeText={(loss) => {
+          setStoploss(loss);
+        }}
+        value={stoploss}
+        ref={stoploss_ref}
         onSubmitEditing={() => {
           method_ref.current.focus();
         }}

@@ -1,24 +1,36 @@
-import React, { Component } from "react";
-import { View, StyleSheet, TouchableOpacity, Image, Text } from "react-native";
+import React from "react";
+import { View, StyleSheet, TouchableOpacity, Image } from "react-native";
 
-function CardList({ name, symbol, cur_price, percentage, logoURL, onPress }) {
-
-  const priceChangeColor = percentage > 0 ? '#34C759' : '#FF3B30';
+function Card({
+  name,
+  symbol,
+  currentPrice,
+  priceChangePercentage7d,
+  logoUrl,
+  onPress,
+}) {
+  const priceChangeColor = priceChangePercentage7d > 0 ? "#34C759" : "#FF3B30";
 
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.itemWrapper}>
+        {/* Left side */}
         <View style={styles.leftWrapper}>
-          <Image source={{ uri: logoURL }} style={styles.image} />
-          <View style={styles.titleWrapper}>
+          <Image source={{ uri: logoUrl }} style={styles.image} />
+          <View style={styles.titlesWrapper}>
             <Text style={styles.title}>{name}</Text>
             <Text style={styles.subtitle}>{symbol.toUpperCase()}</Text>
           </View>
         </View>
 
+        {/* Right side */}
         <View style={styles.rightWrapper}>
-          <Text style={styles.title}>${cur_price.toLocaleString('en-US', { currency: 'USD' })}</Text>
-          <Text style={[styles.subtitle, { color: priceChangeColor }]}>{percentage.toFixed(2)}%</Text>
+          <Text style={styles.title}>
+            ${currentPrice.toLocaleString("en-US", { currency: "USD" })}
+          </Text>
+          <Text style={[styles.subtitle, { color: priceChangeColor }]}>
+            {priceChangePercentage7d.toFixed(2)}%
+          </Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -41,20 +53,20 @@ const styles = StyleSheet.create({
     height: 48,
     width: 48,
   },
-  titleWrapper: {
+  titlesWrapper: {
     marginLeft: 8,
   },
   title: {
     fontSize: 18,
   },
   subtitle: {
+    marginTop: 4,
     fontSize: 14,
     color: "#A9ABB1",
-    marginTop: 4,
   },
   rightWrapper: {
     alignItems: "flex-end",
   },
 });
 
-export default CardList;
+export default Card;

@@ -15,14 +15,14 @@ function TotalValue() {
     let balance_text = '';
     balance_text = balance + '/usdt';
 
-    useEffect(() => {
-        async function react_binance_test(){
-            console.log(await client.time());
-            console.log(await client.book({ symbol: 'ETHBTC' }));
-            console.log(await client.candles({ symbol: 'ETHBTC' }));
-        }
-       react_binance_test();
-    })
+    // useEffect(() => {
+    //     async function react_binance_test(){
+    //         console.log(await client.time());
+    //         console.log(await client.book({ symbol: 'ETHBTC' }));
+    //         console.log(await client.candles({ symbol: 'ETHBTC' }));
+    //     }
+    //    react_binance_test();
+    // })
     
     return (
         <View style={styles.total_info}>

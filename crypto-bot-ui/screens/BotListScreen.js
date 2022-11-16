@@ -14,7 +14,7 @@ function BotListScreen() {
     <SafeAreaView style={styles.root}>
       <View style={styles.container}>
         {/* <BotContextProvider> */}
-        <BotListHeader />
+        {/* <BotListHeader /> */}
         <TotalValue />
         <BotList />
         <FloatingWriteButton right={90} bottom={16} icon="delete-off" />

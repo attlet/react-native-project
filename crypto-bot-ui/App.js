@@ -3,8 +3,9 @@ import RootStack from "./screens/RootStack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { BalanceContextProvider } from "./contexts/BalanceContext";
 import BotContext, { BotContextProvider } from "./contexts/BotContext";
-import { Drawer } from "native-base";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+import DrawerHeader from "./components/header/DrawerHeader";
+
 
 export default function App() {
   return (
@@ -13,8 +14,8 @@ export default function App() {
         <NavigationContainer>
           <BalanceContextProvider>
             <BotContextProvider>
-              <Drawer />
-              <RootStack />
+              <DrawerHeader/>
+              {/* <RootStack /> */}
             </BotContextProvider>
           </BalanceContextProvider>
         </NavigationContainer>

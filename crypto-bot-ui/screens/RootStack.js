@@ -4,7 +4,8 @@ import BotListScreen from './BotListScreen';
 import BotInfoScreen from './BotInfoScreen';
 import AddBotScreen from './AddBotScreen';
 import SignInScreen from './SignInScreen';
-import CryptoTracker from './CryptoTracker';
+import Tracker from './Tracker';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -35,11 +36,7 @@ function RootStack() {
         component={AddBotScreen}
         options={{headerShown: false}}
       />
-      <Stack.Screen
-        name="CryptoView"
-        component={CryptoTracker}
-        options={{title: 'Tracker'}}
-      />
+  
     </Stack.Navigator>
   );
 }
