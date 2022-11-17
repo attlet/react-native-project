@@ -45,67 +45,67 @@ function FloatingRunButton({ Id, right, bottom, visible, setvisible }) {
     const temp = BotData.map((data) =>
       data.id === Id ? { ...data, status: "running" } : data
     );
-
+    setvisible(true);              //modal generation
     setBotData(temp);
     setIcon(true);
-    if (clicked === false) {
-      setClicked(true);
-      const onPress_trading = async () => {
-        try {
-          const response = await api_axios.post(
-            "/bot_trading",
-            {
-              api_key: apiKey,
-              secret_key: secret,
+    // if (clicked === false) {
+    //   setClicked(true);
+    //   const onPress_trading = async () => {
+    //     try {
+    //       const response = await api_axios.post(
+    //         "/bot_trading",
+    //         {
+    //           api_key: apiKey,
+    //           secret_key: secret,
 
-              // trade_log : TradeLog
-            },
-            {
-              params: {
-                status: true,
-                standard_balance: balance,
-              },
-            }
-          );
-          console.log("trading start", response.data);
-        } catch (error) {
-          if (error.response) {
-            console.log(error.response.data);
-            console.log(error.response.status);
-            console.log(error.response.headers);
-          } else if (error.request) {
-            console.log(error.request);
-          } else {
-            console.log("error : ", error.message);
-          }
-          console.log(error.config);
-        }
-      };
-      onPress_trading();
-    } else {
-      const onPress_Retrading = async () => {
-        try {
-          const response = await api_axios.put(
-            "/control_trading",
-            {},
-            { params: { status: true } }
-          );
-          console.log("trading restart", response.data);
-        } catch (error) {
-          if (error.response) {
-            console.log(error.response.data);
-            console.log(error.response.status);
-            console.log(error.response.headers);
-          } else if (error.request) {
-            console.log(error.request);
-          } else {
-            console.log("error : ", error.message);
-          }
-          console.log(error.config);
-        }
-      };
-      onPress_Retrading();
-    }
+    //           // trade_log : TradeLog
+    //         },
+    //         {
+    //           params: {
+    //             status: true,
+    //             standard_balance: balance,
+    //           },
+    //         }
+    //       );
+    //       console.log("trading start", response.data);
+    //     } catch (error) {
+    //       if (error.response) {
+    //         console.log(error.response.data);
+    //         console.log(error.response.status);
+    //         console.log(error.response.headers);
+    //       } else if (error.request) {
+    //         console.log(error.request);
+    //       } else {
+    //         console.log("error : ", error.message);
+    //       }
+    //       console.log(error.config);
+    //     }
+    //   };
+    //   onPress_trading();
+    // } else {
+    //   const onPress_Retrading = async () => {
+    //     try {
+    //       const response = await api_axios.put(
+    //         "/control_trading",
+    //         {},
+    //         { params: { status: true } }
+    //       );
+    //       console.log("trading restart", response.data);
+    //     } catch (error) {
+    //       if (error.response) {
+    //         console.log(error.response.data);
+    //         console.log(error.response.status);
+    //         console.log(error.response.headers);
+    //       } else if (error.request) {
+    //         console.log(error.request);
+    //       } else {
+    //         console.log("error : ", error.message);
+    //       }
+    //       console.log(error.config);
+    //     }
+    //   };
+    //   onPress_Retrading();
+    // }
   };
 
   const setStatus_stop = () => {
@@ -142,48 +142,48 @@ function FloatingRunButton({ Id, right, bottom, visible, setvisible }) {
   };
 
   const onPress_start = () => {
-    // Alert.alert(
-    //   "거래를 시작하겠습니까?",
-    //   "",
-    //   [
-    //     { text: "cancel", style: "cancel" },
-    //     {
-    //       text: "start",
-    //       onPress: () => {
-    //         setStatus_run();
-    //       },
-    //       style: "destructive",
-    //     },
-    //   ],
-    //   {
-    //     cancelable: true,
-    //   }
-    // );
-    setvisible(true);
-    setStatus_run();
+    Alert.alert(
+      "거래를 시작하겠습니까?",
+      "",
+      [
+        { text: "cancel", style: "cancel" },
+        {
+          text: "start",
+          onPress: () => {
+            setStatus_run();
+          },
+          style: "destructive",
+        },
+      ],
+      {
+        cancelable: true,
+      }
+    );
+    
+    
   };
 
   const onPress_stop = () => {
     const cur_icon = "stop";
 
-    // Alert.alert(
-    //   "거래를 중지하겠습니까?",
-    //   "",
-    //   [
-    //     { text: "cancel", style: "cancel" },
-    //     {
-    //       text: "stop",
-    //       onPress: () => {
-    //         setStatus_stop();
-    //       },
-    //       style: "destructive",
-    //     },
-    //   ],
-    //   {
-    //     cancelable: true,
-    //   }
-    // );
-    setStatus_stop();
+    Alert.alert(
+      "거래를 중지하겠습니까?",
+      "",
+      [
+        { text: "cancel", style: "cancel" },
+        {
+          text: "stop",
+          onPress: () => {
+            setStatus_stop();
+          },
+          style: "destructive",
+        },
+      ],
+      {
+        cancelable: true,
+      }
+    );
+
   };
 
   return (
@@ -206,6 +206,7 @@ function FloatingRunButton({ Id, right, bottom, visible, setvisible }) {
       </Pressable>
     </View>
   );
+        
 }
 
 const styles = StyleSheet.create({

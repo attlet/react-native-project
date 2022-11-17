@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import {
   Text,
   View,
@@ -6,12 +6,16 @@ import {
   TextInput,
   Keyboard,
   Alert,
+  Platform,
+  KeyboardAvoidingView,
+  ScrollView,
 } from "react-native";
 import api_axios from "../api/client";
 import KeyboardView from "./keyboard/KeyboardView";
 import WriteContext from "../contexts/WriteContext";
 import Checkbox from "expo-checkbox";
-import { FlatList, ScrollView } from "react-native-gesture-handler";
+import { FlatList } from "react-native-gesture-handler";
+import DropDownPicker from "react-native-dropdown-picker";
 
 function WriteComponent() {
   const name_ref = useRef();
@@ -19,6 +23,7 @@ function WriteComponent() {
   const method_ref = useRef();
   const buystoploss_ref = useRef();
   const sellstoploss_ref = useRef();
+  const leverage_ref = useRef();
 
   const {
     name,
@@ -41,61 +46,94 @@ function WriteComponent() {
     setShort,
     setBuyStoploss,
     setSellStoploss,
+    leverage,
+    setLeverage,
   } = useContext(WriteContext);
 
-  const [botCheck, setBotcheck] = useState([]); //알려주는 걸 넣는 곳.
+  const [botCheck, setBotcheck] = useState([
+    {
+      id: 1,
+      bot: "test1",
+      isCheck: false,
+    },
+    {
+      id: 2,
+      bot: "test2",
+      isCheck: false,
+    },
+    {
+      id: 3,
+      bot: "test3",
+      isCheck: false,
+    },
+    {
+      id: 4,
+      bot: "test4",
+      isCheck: false,
+    },
+    {
+      id: 5,
+      bot: "test5",
+      isCheck: false,
+    },
+    {
+      id: 6,
+      bot: "test6",
+      isCheck: false,
+    },
+    {
+      id: 7,
+      bot: "test7",
+      isCheck: false,
+    },
+  ]); //알려주는 걸 넣는 곳.
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([
+    { label: "btc/usdt", value: "btc" },
+    { label: "eth/usdt", value: "eth" },
+  ]);
 
-  // const onPress_submit = () => {
-  //   if (name.length < 2) {
-  //     Alert.alert(
-  //       "",
-  //       "이름은 두 글자 이상이여야 합니다.",
-  //       [
-  //         {
-  //           text: "닫기",
-  //           onPress: () => console.log("submit 닫기 실행"),
-  //           style: "cancel",
-  //         },
-  //       ],
-  //       { cancelable: false }
-  //     );
-  //   } else if (amount.length < 1 || isNaN(amount) == true) {
-  //     Alert.alert(
-  //       "",
-  //       "숫자를 한 글자 이상 입력해야 합니다.",
-  //       [
-  //         {
-  //           text: "닫기",
-  //           onPress: () => console.log("submit 닫기 실행2"),
-  //           style: "cancel",
-  //         },
-  //       ],
-  //       { cancelable: false }
-  //     );
-  //   } else {
-  //     const getData = async () => {
-  //       try {
-  //         const response = await api_axios.post("/addBot/", {
-  //           name: name,
-  //           amount: amount,
-  //           stragies: method,
-  //         });
-  //         console.log("submit success: ", response.data);
-  //       } catch (error) {
-  //         console.log("submit error:", error);
-  //         console.log("error data:", error.response);
-  //       }
-  //     };
-  //     getData();
-  //   }
-  // };
-
-  const setFunction = (e) => {
-    setMethod(e);
+  const onChange = (e) => {
+    console.log(e);
+    setTest1(e);
   };
 
+  const handleChange = (id) => {
+    
+    let temp = botCheck.map((data) => {
+      if (id === data.id) {
+        return { ...data, isCheck: !data.isCheck };
+      }
+      return data;
+    });
+    setBotcheck(temp);
+  };
+
+  useEffect(()=>{
+    console.log(botCheck);
+  },[botCheck]);
+  
+  const Item = ({ item }) => {
+
+    return (
+      <View style={styles.botSignalcheck}>
+        <Checkbox
+          value={item.isCheck}
+          onValueChange={() => {
+            handleChange(item.id);
+          }}
+          color={item.isCheck ? "tomato" : undefined}
+        />
+        <Text style={styles.botSignalText}>{item.bot}</Text>
+      </View>
+    );
+  };
+
+
+
   return (
-    <ScrollView>
+    <ScrollView nestedScrollEnabled={true}>
       <View style={styles.block}>
         <View style={styles.inputWrapper}>
           <Text style={styles.inputTitle}>bot name : </Text>
@@ -113,21 +151,41 @@ function WriteComponent() {
           />
         </View>
 
-        {/* <View style={styles.inputWrapper}>
-          <Text style={styles.inputTitle}>Amount : </Text>
-          <TextInput
-            placeholder="amount to trading"
-            style={styles.amountInput}
-            onChangeText={(amount) => {
-              setAmount(amount);
-            }}
-            value={amount}
-            ref={amount_ref}
-            onSubmitEditing={() => {
-              buystoploss_ref.current.focus();
-            }}
-          />
-        </View> */}
+        <View style={styles.inputWrapper}>
+          <View style={styles.symbolWrapper}>
+            <Text style={styles.symbolTitle}>Select Symbol : </Text>
+
+            <View style={[styles.symbolRight]}>
+              <DropDownPicker
+                placeholder="Select symbol"
+                open={open}
+                value={value}
+                items={items}
+                setOpen={setOpen}
+                setValue={setValue}
+                setItems={setItems}
+                closeAfterSelecting={true}
+                dropDownDirection="AUTO"
+                listMode="SCROLLVIEW"
+              />
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.leverageWrapper}>
+          <Text style={styles.leverageTitle}>leverage : </Text>
+          <View style={styles.leverageRight}>
+            <TextInput
+              placeholder="Max : 20.0"
+              style={styles.leverageInput}
+              onChangeText={(leverage) => {
+                setLeverage(leverage);
+              }}
+              value={leverage}
+              ref={leverage_ref}
+            />
+          </View>
+        </View>
 
         <View style={styles.inputWrapper}>
           <Text style={styles.lossTitle}>buy stop : </Text>
@@ -164,7 +222,7 @@ function WriteComponent() {
             <Checkbox
               // style={styles.checkbox}
               value={isLong}
-              onValueChange={setLong}
+              onChange={() => setLong}
               color={isLong ? "tomato" : undefined}
             />
             <Text style={styles.orderText}>long</Text>
@@ -174,7 +232,7 @@ function WriteComponent() {
             <Checkbox
               // style={styles.checkbox}
               value={isShort}
-              onValueChange={setShort}
+              onValueChange={() => setShort}
               color={isShort ? "tomato" : undefined}
             />
             <Text style={styles.orderText}>short</Text>
@@ -184,10 +242,16 @@ function WriteComponent() {
         <View style={styles.inputWrapper}>
           <Text style={styles.botSignalTitle}>bot signal : </Text>
           <View style={styles.botSignalRight}>
-            <View style={styles.botSignalcheck}>
+            <FlatList
+              data={botCheck}
+              renderItem={Item}
+              nestedScrollEnabled={true}
+            />
+
+            {/* <View style={styles.botSignalcheck}>
               <Checkbox
                 value={test1}
-                onValueChange={setTest1}
+                onValueChange={onChange}
                 color={test1 ? "tomato" : undefined}
               />
               <Text style={styles.botSignalText}>test1</Text>
@@ -253,8 +317,8 @@ function WriteComponent() {
                 onValueChange={setTest3}
                 color={test3 ? "tomato" : undefined}
               />
-              <Text style={styles.botSignalText}>test3</Text>
-            </View>
+              <Text style={styles.botSignalText}>test3</Text> */}
+            {/* </View> */}
           </View>
         </View>
 
@@ -291,6 +355,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "gray",
     justifyContent: "space-around",
+    zIndex: 100,
   },
   inputTitle: {
     flex: 1,
@@ -315,6 +380,7 @@ const styles = StyleSheet.create({
   orderCheck: {
     flex: 1,
     flexDirection: "row",
+    marginBottom: 10,
   },
   amountInput: {
     flex: 1,
@@ -333,12 +399,52 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 14,
     marginRight: 20,
+    marginBottom: 10,
     paddingLeft: 4,
     borderRadius: 4,
     borderWidth: 1,
     borderColor: "gray",
   },
-
+  symbolWrapper: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  symbolTitle: {
+    flex: 1,
+  },
+  symbolRight: {
+    flex: 1,
+    marginBottom: 10,
+    zIndex: Platform.OS === "ios" ? 100 : null,
+  },
+  leverageWrapper: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    paddingBottom: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "gray",
+    marginBottom: 25,
+  },
+  leverageTitle: {
+    flex: 1,
+  },
+  leverageRight: {
+    flex: 1,
+    marginBottom: 10,
+  },
+  leverageInput: {
+    flex: 1,
+    fontSize: 14,
+    marginHorizontal: 20,
+    paddingLeft: 4,
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: "gray",
+  },
   botSignalTitle: {
     flex: 1,
   },

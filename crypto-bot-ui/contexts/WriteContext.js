@@ -9,6 +9,7 @@ export function WriteContextProvider({ children }) {
   const [isLong, setLong] = useState(false);
   const [isShort, setShort] = useState(false);
   const [method, setMethod] = useState([]);
+  const [leverage, setLeverage] = useState("");
 
   const [test1, setTest1] = useState(false);
   const [test2, setTest2] = useState(false);
@@ -40,6 +41,8 @@ export function WriteContextProvider({ children }) {
         setShort,
         setBuyStoploss,
         setSellStoploss,
+        leverage,
+        setLeverage,
       }}
     >
       {children}

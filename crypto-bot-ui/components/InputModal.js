@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -10,33 +10,58 @@ import {
 } from "react-native";
 import WriteContext from "../contexts/WriteContext";
 import api_axios from "../api/client";
+import BotContext from "../contexts/BotContext";
 
-function InputModal({ visibleState, setvisible }) {
+function InputModal({ visibleState, setvisible, Id }) {
   const { amount, setAmount } = useContext(WriteContext);
+
+  const {
+    checked,
+    setChecked,
+    BotData,
+    setBotData,
+    apiKey,
+    secret,
+    AddBotData,
+    DeleteBotData,
+    DeleteChecked_func,
+    TradeLog,
+    setTradeLog,
+  } = useContext(BotContext);
 
   const { height, width } = useWindowDimensions();
 
   const onPress = () => {
-    console.log("modal press");
+    //여기에 amount 전송 만들기. id를 활용.
+    console.log(visibleState);
     setvisible(false);
   };
+
+  const closeModal = () => {
+    setvisible(false);
+  };
+
   return (
     <Modal
       visible={visibleState}
       animationType="fade"
       transparent={true}
-      onBackdropPress={() => this.closeModal()}
+      onRequestClose={closeModal}
     >
       <View style={styles.root}>
         <View
           style={[
             styles.Wrapper,
             { width: width * 0.7 },
-            { height: height * 0.3 },
+            { height: height * 0.25 },
           ]}
         >
           <View style={{ paddingBottom: 10 }}>
-            <Text style={{fontWeight : 'bold'}}>set Amount of trading</Text>
+            <Text
+              style={[{ fontWeight: "bold", fontSize: 20, color: "tomato" }]}
+            >
+              set Amount of trading
+            </Text>
           </View>
 
           <View style={styles.inputWrapper}>

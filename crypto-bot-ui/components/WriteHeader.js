@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { View, StyleSheet, Alert } from "react-native";
+import { View, StyleSheet, Alert, Text } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import WriteContext from "../contexts/WriteContext";
@@ -29,6 +29,8 @@ function WriteHeader() {
     setShort,
     setBuyStoploss,
     setSellStoploss,
+    leverage,
+    setLeverage
   } = useContext(WriteContext);
   const { BotData, AddBotData } = useContext(BotContext);
 
@@ -76,11 +78,11 @@ function WriteHeader() {
     // };
     // getData();
     AddBotData({
-            name,
-            pnl: 0,
-            roe: 0,
-            status: "stop",
-          });
+      name,
+      pnl: 0,
+      roe: 0,
+      status: "stop",
+    });
     console.log("add bot");
   };
 
@@ -102,21 +104,21 @@ function WriteHeader() {
         ],
         { cancelable: false }
       );
-    }
-    // } else if (amount.length < 1 || isNaN(amount) == true) {
-    //   Alert.alert(
-    //     "",
-    //     "숫자를 한 글자 이상 입력해야 합니다.",
-    //     [
-    //       {
-    //         text: "닫기",
-    //         onPress: () => console.log("submit 닫기 실행2"),
-    //         style: "cancel",
-    //       },
-    //     ],
-    //     { cancelable: false }
-    //   );
-    // } 
+    } else if (parseFloat(leverage) > 20.0 || parseFloat(leverage) < 0.0) {
+      Alert.alert(
+        "",
+        "레버리지 범위는 0.0 ~ 20.0 사이입니다.",
+        [
+          {
+            text: "닫기",
+            onPress: () => console.log("submit 닫기 실행2"),
+            style: "cancel",
+          },
+        ],
+        { cancelable: false }
+      );
+    } 
+
     else {
       onPress_submit();
     }
@@ -132,6 +134,7 @@ function WriteHeader() {
           onPress={onPress_back}
         />
       </View>
+      <Text style={styles.titleText}>Add Bot</Text>
       <View style={styles.rightButton}>
         <AntDesign
           name="check"
@@ -151,8 +154,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    borderBottomWidth : 0.5,
-    borderBottomColor : 'gray'
+    borderBottomWidth: 0.5,
+    borderBottomColor: "gray",
+  },
+  titleText: {
+    fontSize: 16,
+    fontWeight: "bold",
   },
   rightButton: {
     flexDirection: "row",

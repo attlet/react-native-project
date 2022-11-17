@@ -20,6 +20,7 @@ export function BotContextProvider({ children }) {
   const [secret, setSecret] = useState("");
   const [TradeLog, setTradeLog] = useState([]);
 
+
   const AddBotData = ({ name, amount, stoploss, pnl, roe, method, status }) => {
     const new_data = {
       id: uuidv4(),
@@ -75,6 +76,7 @@ export function BotContextProvider({ children }) {
         DeleteChecked_func,
         TradeLog,
         setTradeLog,
+        
       }}
     >
       {children}

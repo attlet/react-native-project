@@ -1,3 +1,4 @@
+import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import React, { useRef, useEffect, useState } from "react";
 import { KeyboardAvoidingView, Modal, StyleSheet, View } from "react-native";
 import BotHistoryTab from "../components/bot_info/BotHistoryTab";
@@ -8,8 +9,8 @@ import { BotContextProvider } from "../contexts/BotContext";
 
 function BotInfoScreen({ route }) {
   const [visible, setvisible] = useState(false);
-
-  const setvisible_func = ({ item }) => {
+  
+  const setvisible_func = (item) => {
     setvisible(item);
   };
 
@@ -17,7 +18,7 @@ function BotInfoScreen({ route }) {
     <View style={styles.root}>
       
         {/* <BotContextProvider> */}
-        <InputModal visibleState={visible} setvisible={setvisible_func} />
+        <InputModal visibleState={visible} setvisible={setvisible_func} Id={route.params.id} />
         <BotValue Id={route.params.id} />
         <BotHistoryTab />
         <FloatingRunButton

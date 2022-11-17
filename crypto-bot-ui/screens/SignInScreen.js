@@ -49,7 +49,6 @@ function SignInScreen() {
         console.log(response.data);
         console.log(apiKey);
         console.log(secret);
-        console.log(temp);
         console.log(balance);
         navigation.navigate("CryptoView");
         //navigation.navigate("BotList");
