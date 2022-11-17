@@ -10,7 +10,7 @@ function WriteHeader() {
   const navigation = useNavigation();
   const {
     name,
-    amount,
+    symbol,
     isLong,
     isShort,
     method,
@@ -35,27 +35,24 @@ function WriteHeader() {
     setBotcheck,
   } = useContext(WriteContext);
   const { BotData, AddBotData } = useContext(BotContext);
-
+  
+ 
   const onPress_submit = () => {
     const getData = async () => {
       try {
-        const response = await api_axios.post("/addBot/", {
-          bot: BotData,
+        const response = await api_axios.post("/new_bot/",{
+          name : name,
+          symbol : symbol,
+          long : isLong,
+          short : isShort,
+          tp: BuyStoploss,
+          sl: SellStoploss,
+          leverage: leverage,
+          sig_list: botCheck,
+        
         });
-        AddBotData({
-          name,
-          amount,
-          BuyStoploss,
-          SellStoploss,
-          isLong,
-          isShort,
-          pnl: 0,
-          roe: 0,
-          method,
-          status: "stop",
-        });
-        console.log("submit success: ", response.data);
-        navigation.pop();
+        /*name amount ...*/ 
+        console.log(response.data);
       } catch (error) {
         if (error.response) {
           console.log(error.response.data);
@@ -67,22 +64,55 @@ function WriteHeader() {
           console.log("error : ", error.message);
         }
         console.log(error.config);
-        Alert.alert(
-          "",
-          "데이터 전송 실패",
-          [
-            {
-              text: "닫기",
-              onPress: () => console.log("submit 데이터 전송 실패 닫기 실행"),
-              style: "cancel",
-            },
-          ],
-          { cancelable: false }
-        );
       }
     };
+   
+
+    //     let blank_list = [];
+
+    //     AddBotData({
+    //       name,
+    //       symbol,
+    //       BuyStoploss,
+    //       SellStoploss,
+    //       isLong,
+    //       isShort,
+    //       pnl: 0,
+    //       roe: 0,
+    //       method,
+    //       status: "stop",
+    //       tradelog : blank_list
+    //     });
+    //     console.log("submit success: ", response.data);
+    //     navigation.pop();
+    //   } catch (error) {
+    //     if (error.response) {
+    //       console.log(error.response.data);
+    //       console.log(error.response.status);
+    //       console.log(error.response.headers);
+    //     } else if (error.request) {
+    //       console.log(error.request);
+    //     } else {
+    //       console.log("error : ", error.message);
+    //     }
+    //     console.log(error.config);
+    //     Alert.alert(
+    //       "",
+    //       "데이터 전송 실패",
+    //       [
+    //         {
+    //           text: "닫기",
+    //           onPress: () => console.log("submit 데이터 전송 실패 닫기 실행"),
+    //           style: "cancel",
+    //         },
+    //       ],
+    //       { cancelable: false }
+    //     );
+    //   }
+    // };
+
     getData();
-  
+
     console.log("add bot");
   };
 
@@ -117,9 +147,7 @@ function WriteHeader() {
         ],
         { cancelable: false }
       );
-    } 
-
-    else {
+    } else {
       onPress_submit();
     }
   };
