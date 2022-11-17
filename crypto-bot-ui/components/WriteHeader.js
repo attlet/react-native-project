@@ -30,59 +30,59 @@ function WriteHeader() {
     setBuyStoploss,
     setSellStoploss,
     leverage,
-    setLeverage
+    setLeverage,
+    botCheck,
+    setBotcheck,
   } = useContext(WriteContext);
   const { BotData, AddBotData } = useContext(BotContext);
 
   const onPress_submit = () => {
-    // const getData = async () => {
-    //   try {
-    //     const response = await api_axios.post("/addBot/", {
-    //       bot: BotData,
-    //     });
-    //     AddBotData({
-    //       name,
-    //       amount,
-    //       stoploss,
-    //       pnl: 0,
-    //       roe: 0,
-    //       method,
-    //       status: "stop",
-    //     });
-    //     console.log("submit success: ", response.data);
-    //     navigation.pop();
-    //   } catch (error) {
-    //     if (error.response) {
-    //       console.log(error.response.data);
-    //       console.log(error.response.status);
-    //       console.log(error.response.headers);
-    //     } else if (error.request) {
-    //       console.log(error.request);
-    //     } else {
-    //       console.log("error : ", error.message);
-    //     }
-    //     console.log(error.config);
-    //     Alert.alert(
-    //       "",
-    //       "데이터 전송 실패",
-    //       [
-    //         {
-    //           text: "닫기",
-    //           onPress: () => console.log("submit 데이터 전송 실패 닫기 실행"),
-    //           style: "cancel",
-    //         },
-    //       ],
-    //       { cancelable: false }
-    //     );
-    //   }
-    // };
-    // getData();
-    AddBotData({
-      name,
-      pnl: 0,
-      roe: 0,
-      status: "stop",
-    });
+    const getData = async () => {
+      try {
+        const response = await api_axios.post("/addBot/", {
+          bot: BotData,
+        });
+        AddBotData({
+          name,
+          amount,
+          BuyStoploss,
+          SellStoploss,
+          isLong,
+          isShort,
+          pnl: 0,
+          roe: 0,
+          method,
+          status: "stop",
+        });
+        console.log("submit success: ", response.data);
+        navigation.pop();
+      } catch (error) {
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log("error : ", error.message);
+        }
+        console.log(error.config);
+        Alert.alert(
+          "",
+          "데이터 전송 실패",
+          [
+            {
+              text: "닫기",
+              onPress: () => console.log("submit 데이터 전송 실패 닫기 실행"),
+              style: "cancel",
+            },
+          ],
+          { cancelable: false }
+        );
+      }
+    };
+    getData();
+  
     console.log("add bot");
   };
 

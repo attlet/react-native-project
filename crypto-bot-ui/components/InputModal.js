@@ -13,7 +13,7 @@ import api_axios from "../api/client";
 import BotContext from "../contexts/BotContext";
 
 function InputModal({ visibleState, setvisible, Id }) {
-  const { amount, setAmount } = useContext(WriteContext);
+  // const { amount, setAmount } = useContext(WriteContext);
 
   const {
     checked,
@@ -28,15 +28,41 @@ function InputModal({ visibleState, setvisible, Id }) {
     TradeLog,
     setTradeLog,
   } = useContext(BotContext);
-
+  const [amount , setAmount] = useState('');
   const { height, width } = useWindowDimensions();
+
+  const isTrueId = (data) => {
+    if (data.id === Id) {
+      return true;
+    }
+  };
+
+  const One_BotData = BotData.find(isTrueId);
 
   const onPress = () => {
     //여기에 amount 전송 만들기. id를 활용.
-    console.log(visibleState);
-    setvisible(false);
+    const getData = async () => {
+      try {
+        const response = await api_axios.post("/addBot/", {
+          //id
+          amount : amount
+        });
+      } catch (error) {
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log("error : ", error.message);
+        }
+        console.log(error.config);
+      }
+      console.log(visibleState);
+      setvisible(false);
+    };
   };
-
   const closeModal = () => {
     setvisible(false);
   };

@@ -18,6 +18,44 @@ export function WriteContextProvider({ children }) {
   const [BuyStoploss, setBuyStoploss] = useState("");
   const [SellStoploss, setSellStoploss] = useState("");
 
+  const [botCheck, setBotcheck] = useState([
+    {
+      id: 1,
+      bot: "test1",
+      isCheck: false,
+    },
+    {
+      id: 2,
+      bot: "test2",
+      isCheck: false,
+    },
+    {
+      id: 3,
+      bot: "test3",
+      isCheck: false,
+    },
+    {
+      id: 4,
+      bot: "test4",
+      isCheck: false,
+    },
+    {
+      id: 5,
+      bot: "test5",
+      isCheck: false,
+    },
+    {
+      id: 6,
+      bot: "test6",
+      isCheck: false,
+    },
+    {
+      id: 7,
+      bot: "test7",
+      isCheck: false,
+    },
+  ]);
+
   return (
     <WriteContext.Provider
       value={{
@@ -43,6 +81,8 @@ export function WriteContextProvider({ children }) {
         setSellStoploss,
         leverage,
         setLeverage,
+        botCheck,
+        setBotcheck,
       }}
     >
       {children}

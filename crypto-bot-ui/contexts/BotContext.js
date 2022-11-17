@@ -21,12 +21,15 @@ export function BotContextProvider({ children }) {
   const [TradeLog, setTradeLog] = useState([]);
 
 
-  const AddBotData = ({ name, amount, stoploss, pnl, roe, method, status }) => {
+  const AddBotData = ({ name, amount, Buystoploss, Sellstoploss, long, short, pnl, roe, method, status }) => {
     const new_data = {
       id: uuidv4(),
       name,
       amount,
-      stoploss,
+      Buystoploss,
+      Sellstoploss,
+      long,
+      short,
       pnl,
       roe,
       method,

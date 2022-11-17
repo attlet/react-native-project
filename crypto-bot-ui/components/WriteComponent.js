@@ -48,45 +48,47 @@ function WriteComponent() {
     setSellStoploss,
     leverage,
     setLeverage,
+    botCheck,
+    setBotcheck,
   } = useContext(WriteContext);
 
-  const [botCheck, setBotcheck] = useState([
-    {
-      id: 1,
-      bot: "test1",
-      isCheck: false,
-    },
-    {
-      id: 2,
-      bot: "test2",
-      isCheck: false,
-    },
-    {
-      id: 3,
-      bot: "test3",
-      isCheck: false,
-    },
-    {
-      id: 4,
-      bot: "test4",
-      isCheck: false,
-    },
-    {
-      id: 5,
-      bot: "test5",
-      isCheck: false,
-    },
-    {
-      id: 6,
-      bot: "test6",
-      isCheck: false,
-    },
-    {
-      id: 7,
-      bot: "test7",
-      isCheck: false,
-    },
-  ]); //알려주는 걸 넣는 곳.
+  // const [botCheck, setBotcheck] = useState([
+  //   {
+  //     id: 1,
+  //     bot: "test1",
+  //     isCheck: false,
+  //   },
+  //   {
+  //     id: 2,
+  //     bot: "test2",
+  //     isCheck: false,
+  //   },
+  //   {
+  //     id: 3,
+  //     bot: "test3",
+  //     isCheck: false,
+  //   },
+  //   {
+  //     id: 4,
+  //     bot: "test4",
+  //     isCheck: false,
+  //   },
+  //   {
+  //     id: 5,
+  //     bot: "test5",
+  //     isCheck: false,
+  //   },
+  //   {
+  //     id: 6,
+  //     bot: "test6",
+  //     isCheck: false,
+  //   },
+  //   {
+  //     id: 7,
+  //     bot: "test7",
+  //     isCheck: false,
+  //   },
+  // ]); //알려주는 걸 넣는 곳.
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([
@@ -113,7 +115,7 @@ function WriteComponent() {
   useEffect(()=>{
     console.log(botCheck);
   },[botCheck]);
-  
+
   const Item = ({ item }) => {
 
     return (
@@ -222,7 +224,7 @@ function WriteComponent() {
             <Checkbox
               // style={styles.checkbox}
               value={isLong}
-              onChange={() => setLong}
+              onValueChange={setLong}
               color={isLong ? "tomato" : undefined}
             />
             <Text style={styles.orderText}>long</Text>
@@ -232,7 +234,7 @@ function WriteComponent() {
             <Checkbox
               // style={styles.checkbox}
               value={isShort}
-              onValueChange={() => setShort}
+              onValueChange={setShort}
               color={isShort ? "tomato" : undefined}
             />
             <Text style={styles.orderText}>short</Text>
